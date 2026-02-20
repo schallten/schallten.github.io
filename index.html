@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abhinav | Systems & Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300..700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -13,87 +19,113 @@
   </header>
 
   <nav>
-    <a href="#intro">INTRO</a>
-    <a href="#skills">SKILLS</a>
-    <a href="#projects">PROJECTS</a>
-    <a href="#learning">LEARNING</a>
-    <a href="#contact">CONTACT</a>
+    <div class="nav-container">
+      <a href="#intro">01 Intro</a>
+      <a href="#skills">02 Skills</a>
+      <a href="#projects">03 Projects</a>
+      <a href="#contact">04 Contact</a>
+    </div>
   </nav>
 
   <main>
-    <section id="intro">
-      <h2>SYSTEMS DEVELOPER</h2>
-      <div class="intro-subtitle">B.Tech Student & Low-Level Enthusiast</div>
-      <div class="intro-text">
-        Building from the ground up. I specialize in systems programming, custom compilers, and backend architecture. A 6-year Linux daily driver with a passion for understanding the "how" behind the hardware-software interface.
+    <section id="intro" data-number="01">
+      <div class="section-header">
+        <h2>Systems Developer</h2>
+        <div class="intro-subtitle">B.Tech Student & Low-Level Enthusiast</div>
+      </div>
+      <div class="intro-content">
+        <div class="intro-text">
+          Building from the ground up. I specialize in systems programming, custom compilers, and backend architecture.
+          A 6-year Linux daily driver with a passion for understanding the "how" behind the hardware-software interface.
+        </div>
       </div>
     </section>
 
-    <section id="skills">
-      <h2>SKILLS</h2>
-      
-      <div class="skill-block">
-        <h4>LANGUAGES</h4>
-        <p><strong>Primary:</strong> C++, Python, Go, JavaScript, Bash</p>
-      </div>
+    <section id="skills" data-number="02">
+      <h2>Skills</h2>
 
-      <div class="skill-block">
-        <h4>SYSTEMS & EMBEDDED</h4>
-        <p>ESP8266, LittleFS, I2C, OS Kernel Basics, Task Scheduling</p>
-      </div>
+      <div class="skills-grid">
+        <div class="skill-block">
+          <h4>Languages</h4>
+          <p><strong>Primary:</strong> C++, Python, Go, JavaScript, Bash</p>
+        </div>
 
-      <div class="skill-block">
-        <h4>FRAMEWORKS & TOOLS</h4>
-        <p>FastAPI, Flask, React, Docker, Nginx, Git, GDB, Neovim</p>
-      </div>
+        <div class="skill-block">
+          <h4>Systems & Embedded</h4>
+          <p>ESP8266, LittleFS, I2C, OS Kernel Basics, Task Scheduling</p>
+        </div>
 
-      <div class="skill-block">
-        <h4>DATABASES</h4>
-        <p>PostgreSQL, SQLite, MySQL</p>
-      </div>
-    </section>
+        <div class="skill-block">
+          <h4>Frameworks & Tools</h4>
+          <p>FastAPI, Flask, React, Docker, Nginx, Git, GDB, Neovim</p>
+        </div>
 
-    <section id="projects">
-      <h2>PROJECTS</h2>
-      <div class="project-item">
-        <h3>MICROCONTROLLER OS</h3>
-        <p>Experimental C++ environment for ESP8266 with LittleFS and shell utilities.</p>
-        <a href="https://github.com/schallten/system_operating" target="_blank">VIEW REPO</a>
-      </div>
-
-      <div class="project-item">
-        <h3>ELIN LANGUAGE</h3>
-        <p>A stack-based toy language featuring a Python compiler and a C++ Virtual Machine.</p>
-        <a href="https://github.com/schallten/elin" target="_blank">VIEW REPO</a>
-      </div>
-
-      <div class="project-item">
-        <h3>PMG (POOR MAN'S GIT)</h3>
-        <p>Custom VCS CLI in Go with a FastAPI/React web dashboard for repo hosting.</p>
-        <a href="https://github.com/schallten/pmg" target="_blank">VIEW REPO</a>
-      </div>
-
-      <div class="project-item">
-        <h3>VN-CORE</h3>
-        <p>High-performance Visual Novel engine with a custom DSL and Pygame renderer.</p>
-        <a href="https://github.com/schallten/VN-Core" target="_blank">VIEW REPO</a>
+        <div class="skill-block">
+          <h4>Databases</h4>
+          <p>PostgreSQL, SQLite, MySQL</p>
+        </div>
       </div>
     </section>
 
-    <section id="learning">
-      <h2>CURRENTLY<br>LEARNING</h2>
-      <div class="raw-text">
-        Compilers, OS Kernel development, and preparing for GSoC 2026.
+    <section id="projects" data-number="03">
+      <h2>Projects</h2>
+
+      <div class="projects-list">
+        <div class="project-item">
+          <div class="project-meta">
+            <h3>Microcontroller OS</h3>
+            <span class="project-stack">C++, ESP8266, LittleFS</span>
+          </div>
+          <div class="project-details">
+            <p>Experimental C++ environment for ESP8266 with LittleFS and shell utilities.</p>
+            <a href="https://github.com/schallten/system_operating" target="_blank" class="view-link">View Repo</a>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-meta">
+            <h3>Elin Language</h3>
+            <span class="project-stack">Python, C++, Virtual Machine</span>
+          </div>
+          <div class="project-details">
+            <p>A stack-based toy language featuring a Python compiler and a C++ Virtual Machine.</p>
+            <a href="https://github.com/schallten/elin" target="_blank" class="view-link">View Repo</a>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-meta">
+            <h3>PMG (Poor Man's Git)</h3>
+            <span class="project-stack">Go, FastAPI, React</span>
+          </div>
+          <div class="project-details">
+            <p>Custom VCS CLI in Go with a FastAPI/React web dashboard for repo hosting.</p>
+            <a href="https://github.com/schallten/pmg" target="_blank" class="view-link">View Repo</a>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <div class="project-meta">
+            <h3>VN-Core</h3>
+            <span class="project-stack">DSL, Pygame, Python</span>
+          </div>
+          <div class="project-details">
+            <p>High-performance Visual Novel engine with a custom DSL and Pygame renderer.</p>
+            <a href="https://github.com/schallten/VN-Core" target="_blank" class="view-link">View Repo</a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="contact">
-      <h2>CONTACT</h2>
-      <ul class="contact-list">
-        <li><a href="https://www.linkedin.com/in/abhinav-592907335/" target="_blank">LINKEDIN</a></li>
-        <li><a href="https://github.com/schallten" target="_blank">GITHUB</a></li>
-        <li><a href="resume.pdf" target="_blank">RESUME.PDF</a></li>
-      </ul>
+    <section id="contact" data-number="04">
+      <h2>Contact</h2>
+      <div class="contact-content">
+        <ul class="contact-list">
+          <li><a href="https://www.linkedin.com/in/abhinav-592907335/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com/schallten" target="_blank">GitHub</a></li>
+          <li><a href="resume.pdf" target="_blank">Resume.pdf</a></li>
+        </ul>
+      </div>
     </section>
   </main>
 
@@ -101,4 +133,5 @@
     <p>© 2026 ABHINAV. ALL RIGHTS RESERVED.</p>
   </footer>
 </body>
+
 </html>

@@ -1,230 +1,354 @@
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+:root {
+  --bg-color: #FAFAFA;
+  --text-color: #000000;
+  --accent-color: #E63329;
+  --grid-line-color: rgba(0, 0, 0, 0.08);
+  --section-number-color: #E0E0E0;
+  --serif-font: 'DM Serif Display', serif;
+  --sans-font: 'Space Grotesk', sans-serif;
+  --grid-dots: radial-gradient(circle, #000 1px, transparent 1px);
+}
 
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    body {
-      font-family: 'Space Grotesk', monospace, sans-serif;
-      background: #FAFAFA;
-      color: #000000;
-      line-height: 1.4;
-      font-size: 18px;
-    }
+body {
+  font-family: var(--sans-font);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  font-size: 16px;
+  overflow-x: hidden;
+  /* Subtle dot grid background */
+  background-image: var(--grid-dots);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+  opacity: 1;
+}
 
-    .container {
-      max-width: 900px;
-      margin: 0;
-      padding: 0 5vw;
-    }
+/* 12-Column Grid Container */
+main,
+header,
+footer,
+.nav-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
 
-    header {
-      padding: 60px 5vw 30px;
-      border-bottom: 3px solid #000000;
-    }
+/* Header */
+header {
+  padding-top: 80px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--text-color);
+}
 
-    header h1 {
-      font-weight: 700;
-      font-size: clamp(40px, 8vw, 90px);
-      text-transform: uppercase;
-      letter-spacing: -0.03em;
-      line-height: 0.9;
-    }
+header h1 {
+  grid-column: 1 / span 12;
+  font-family: var(--serif-font);
+  font-size: clamp(60px, 12vw, 150px);
+  line-height: 0.9;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
 
-    nav {
-      padding: 20px 5vw;
-      border-bottom: 3px solid #000000;
-      display: flex;
-      gap: 40px;
-      overflow-x: auto;
-    }
+/* Navigation */
+nav {
+  position: sticky;
+  top: 0;
+  background: var(--bg-color);
+  border-bottom: 1px solid var(--text-color);
+  z-index: 100;
+  padding: 15px 0;
+}
 
-    nav a {
-      text-decoration: none;
-      color: #000000;
-      font-weight: 700;
-      font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      border-bottom: 3px solid transparent;
-      padding-bottom: 2px;
-      transition: border-color 0.2s;
-    }
+.nav-container a {
+  grid-column: span 2;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.2s;
+  position: relative;
+  width: fit-content;
+}
 
-    nav a:hover {
-      border-bottom: 3px solid #FF0055;
-    }
+.nav-container a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease;
+}
 
-    main {
-      padding: 0 5vw 100px;
-    }
+.nav-container a:hover::after {
+  width: 100%;
+}
 
-    section {
-      margin-top: 120px;
-    }
+.nav-container a:hover {
+  color: var(--accent-color);
+}
 
-    section:first-child {
-      margin-top: 80px;
-    }
+/* Sections */
+section {
+  grid-column: 1 / span 12;
+  padding: 100px 0;
+  border-bottom: 1px solid var(--grid-line-color);
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
 
-    h2 {
-      font-size: clamp(50px, 10vw, 120px);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: -0.04em;
-      line-height: 0.85;
-      margin-bottom: 60px;
-      margin-left: -5px;
-    }
+section::before {
+  content: attr(data-number);
+  position: absolute;
+  top: 80px;
+  left: -20px;
+  font-family: var(--serif-font);
+  font-size: 180px;
+  color: var(--section-number-color);
+  opacity: 0.4;
+  z-index: -1;
+  pointer-events: none;
+}
 
-    h3 {
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      margin-bottom: 20px;
-      line-height: 1;
-    }
+h2 {
+  grid-column: 1 / span 4;
+  font-family: var(--serif-font);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 30px;
+}
 
-    .intro-subtitle {
-      font-size: clamp(20px, 3vw, 32px);
-      font-weight: 400;
-      margin-bottom: 40px;
-      margin-top: 30px;
-    }
+/* Intro Section */
+.section-header {
+  grid-column: 1 / span 6;
+}
 
-    .intro-text {
-      font-size: 22px;
-      line-height: 1.5;
-      max-width: 600px;
-      margin-top: 40px;
-    }
+.intro-subtitle {
+  font-size: 18px;
+  color: var(--accent-color);
+  margin-top: 10px;
+  font-weight: 500;
+}
 
-    .skill-block {
-      margin-bottom: 50px;
-      padding-left: 0;
-    }
+.intro-content {
+  grid-column: 7 / span 6;
+}
 
-    .skill-block h4 {
-      font-size: 20px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 15px;
-      color: #FF0055;
-    }
+.intro-text {
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 300;
+}
 
-    .skill-block p {
-      font-size: 18px;
-      line-height: 1.6;
-      margin-left: 0;
-    }
+/* Skills Section */
+.skills-grid {
+  grid-column: 5 / span 8;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
 
-    .skill-block strong {
-      font-weight: 700;
-      color: #000000;
-    }
+.skill-block h4 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  color: var(--accent-color);
+}
 
-    .raw-text {
-      font-size: 18px;
-      line-height: 1.7;
-      margin-top: 30px;
-      padding: 40px 0;
-      border-top: 2px solid #000000;
-      border-bottom: 2px solid #000000;
-    }
+.skill-block p {
+  font-size: 18px;
+}
 
-    .contact-list {
-      list-style: none;
-      margin-top: 40px;
-    }
+/* Projects Section */
+.projects-list {
+  grid-column: 1 / span 12;
+  margin-top: 40px;
+}
 
-    .contact-list li {
-      margin-bottom: 20px;
-    }
+.project-item {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+  padding: 40px 0;
+  border-top: 1px solid var(--grid-line-color);
+}
 
-    .contact-list a {
-      font-size: 24px;
-      font-weight: 700;
-      color: #000000;
-      text-decoration: underline;
-      text-decoration-thickness: 3px;
-      text-underline-offset: 5px;
-      text-decoration-color: #FF0055;
-      transition: all 0.2s;
-      display: inline-block;
-    }
+.project-item:first-child {
+  border-top: none;
+}
 
-    .contact-list a:hover {
-      color: #FF0055;
-      text-decoration-color: #000000;
-      transform: translateX(10px);
-    }
+.project-meta {
+  grid-column: 1 / span 5;
+}
 
-    footer {
-      padding: 60px 5vw;
-      border-top: 3px solid #000000;
-      margin-top: 100px;
-    }
+.project-meta h3 {
+  font-family: var(--serif-font);
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
 
-    footer p {
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
+.project-stack {
+  font-size: 14px;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
-    /* Asymmetric spacing */
-    #skills { margin-top: 140px; }
-    #projects { margin-top: 100px; }
-    #learning { margin-top: 160px; }
-    #contact { margin-top: 130px; }
+.project-details {
+  grid-column: 7 / span 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-    @media (max-width: 768px) {
-      header {
-        padding: 40px 5vw 20px;
-      }
+.project-details p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
 
-      nav {
-        padding: 15px 5vw;
-        gap: 25px;
-      }
+.view-link {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--text-color);
+  width: fit-content;
+  transition: all 0.3s;
+}
 
-      nav a {
-        font-size: 14px;
-      }
+.view-link:hover {
+  color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
 
-      section {
-        margin-top: 80px;
-      }
+/* Learning */
+.learning-content {
+  grid-column: 5 / span 8;
+}
 
-      section:first-child {
-        margin-top: 50px;
-      }
+.raw-text {
+  font-size: 24px;
+  font-family: var(--serif-font);
+  font-style: italic;
+  padding: 40px 0;
+}
 
-      h2 {
-        margin-bottom: 40px;
-      }
+/* Contact */
+.contact-content {
+  grid-column: 5 / span 8;
+}
 
-      .intro-text {
-        font-size: 18px;
-      }
+.contact-list {
+  list-style: none;
+}
 
-      .skill-block {
-        margin-bottom: 40px;
-      }
+.contact-list li {
+  margin-bottom: 15px;
+}
 
-      .contact-list a {
-        font-size: 20px;
-      }
+.contact-list a {
+  font-family: var(--serif-font);
+  font-size: 32px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s;
+  border-bottom: 1px solid transparent;
+}
 
-      /* Reset asymmetric spacing on mobile */
-      #skills, #projects, #learning, #contact {
-        margin-top: 80px;
-      }
-    }
+.contact-list a:hover {
+  color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+
+/* Footer */
+footer {
+  padding: 80px 40px;
+  border-top: 1px solid var(--text-color);
+}
+
+footer p {
+  grid-column: 1 / span 12;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0.6;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+
+  main,
+  header,
+  footer,
+  .nav-container {
+    padding: 0 20px;
+  }
+
+  .nav-container a {
+    grid-column: span 3;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 80px;
+  }
+
+  section {
+    display: block;
+    padding: 60px 0;
+  }
+
+  section::before {
+    font-size: 120px;
+    top: 40px;
+    left: 0;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 36px;
+  }
+
+  .intro-content,
+  .skills-grid,
+  .learning-content,
+  .contact-content {
+    margin-top: 20px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-item {
+    display: block;
+    padding: 30px 0;
+  }
+
+  .project-meta {
+    margin-bottom: 15px;
+  }
+}
