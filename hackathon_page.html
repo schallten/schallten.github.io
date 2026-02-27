@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevRooms.ai // Pitch Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@1,600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --p-bg: #030303;
+            --p-card: #0a0a0a;
+            --p-accent: #00f2ff;
+            --p-accent-glow: rgba(0, 242, 255, 0.15);
+            --p-text: #ffffff;
+            --p-text-dim: #999999;
+            --font-main: 'Outfit', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--p-bg);
+            color: var(--p-text);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* Background Atmosphere */
+        .p-bg-wrapper {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .p-bg-noise {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+            z-index: 1;
+        }
+
+        .p-bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 2;
+        }
+
+        .p-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(160px);
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        /* Header */
+        .p-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, var(--p-bg), transparent);
+        }
+
+        .p-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .p-brand-logo {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--p-accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+        }
+
+        .p-brand-name {
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+
+        .launch-btn-small {
+            color: var(--p-accent);
+            font-weight: 800;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        /* Sections */
+        .p-section {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .p-section-inner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .p-glass-card {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 48px;
+            padding: 5rem;
+            box-shadow: 0 50px 100px -30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .p-glass-card.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Styling */
+        .hero-title-wrapper {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .hero-title-wrapper.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typography */
+        .p-tag {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: var(--p-accent);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .p-title-huge {
+            font-size: clamp(4rem, 10vw, 9rem);
+            font-weight: 800;
+            line-height: 0.85;
+            letter-spacing: -0.05em;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .p-title-standard {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+        }
+
+        .p-subtitle {
+            font-size: 1.5rem;
+            color: var(--p-text-dim);
+            max-width: 700px;
+            line-height: 1.5;
+            margin-bottom: 3rem;
+        }
+
+        .p-serif {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 400;
+            text-transform: none;
+        }
+
+        /* Features */
+        .p-grid-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: start;
+            margin-top: 3rem;
+        }
+
+        .p-stat-box {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .p-stat-box:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--p-accent);
+        }
+
+        .p-stat-value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--p-accent);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .p-stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--p-text-dim);
+            font-weight: 700;
+        }
+
+        .p-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .p-list-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .p-icon-circle {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 16px;
+            background: var(--p-accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--p-accent);
+            flex-shrink: 0;
+        }
+
+        /* Terminal */
+        .p-terminal {
+            background: #000;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .p-terminal-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* Icons */
+        svg {
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Final Button */
+        .launch-btn-large {
+            background: var(--p-accent);
+            color: black;
+            padding: 1.5rem 5rem;
+            border-radius: 16px;
+            fontWeight: 800;
+            display: inline-block;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            font-weight: 800;
+            box-shadow: 0 20px 40px var(--p-accent-glow);
+            transition: all 0.3s ease;
+        }
+
+        .launch-btn-large:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px var(--p-accent-glow);
+        }
+
+        @media (max-width: 768px) {
+            .p-glass-card {
+                padding: 2.5rem;
+                border-radius: 24px;
+            }
+
+            .p-section {
+                padding: 4rem 1rem;
+            }
+
+            .p-header {
+                padding: 1.5rem 2rem;
+            }
+
+            .p-title-huge {
+                font-size: 3.5rem;
+            }
+
+            .p-title-standard {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Utilities */
+        .text-accent {
+            color: var(--p-accent);
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .gap-4 {
+            gap: 1rem;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .tracking-widest {
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="p-bg-wrapper">
+        <div class="p-bg-grid"></div>
+        <div class="p-bg-noise"></div>
+        <div class="p-orb" style="top: 10%; left: -5%; width: 800px; height: 800px; background: var(--p-accent);"></div>
+        <div class="p-orb" style="bottom: 20%; right: -10%; width: 1000px; height: 1000px; background: #7000ff;"></div>
+    </div>
+
+    <header class="p-header">
+        <div class="p-brand">
+            <div class="p-brand-logo">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="black">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
+            </div>
+            <span class="p-brand-name">DEVROOMS // PITCH</span>
+        </div>
+        <a href="https://dev-chatrooms-h1vkq4p77-schalltens-projects.vercel.app/" class="launch-btn-small">Launch MVP</a>
+    </header>
+
+    <!-- SECTION 1: HERO -->
+    <section class="p-section">
+        <div class="p-section-inner">
+            <div class="hero-title-wrapper scroll-reveal">
+                <span class="p-tag">A Paradigm Shift In Debugging</span>
+                <h1 class="p-title-huge">DEVROOMS<span class="p-serif text-accent">.AI</span></h1>
+                <p class="p-subtitle">Your engineering team's private context brain. Chat, code, and ship fixes in one
+                    focused room.</p>
+                <div class="p-grid-content">
+                    <div class="p-stat-box">
+                        <span class="p-stat-value">Neural</span>
+                        <span class="p-stat-label">Context-Aware AI</span>
+                    </div>
+                    <div class="p-stat-box">
+                        <span class="p-stat-value">Scale</span>
+                        <span class="p-stat-label">Built for Teams</span>
+                    </div>
+                    <div class="p-stat-box">
+                        <span class="p-stat-value">Velocity</span>
+                        <span class="p-stat-label">Instant Patches</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: PROBLEM -->
+    <section class="p-section">
+        <div class="p-section-inner">
+            <div class="p-glass-card scroll-reveal">
+                <span class="p-tag">The Friction</span>
+                <h2 class="p-title-standard">THE CONTEXT<span class="p-serif text-accent"> GAP</span></h2>
+                <p class="p-subtitle">Developers waste hours context-switching between fragmented chat threads and their
+                    code.</p>
+                <div class="p-grid-content">
+                    <ul class="p-list">
+                        <li class="p-list-item">
+                            <div class="p-icon-circle"><svg width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg></div>
+                            <span>Fragmented Slack Conversations</span>
+                        </li>
+                        <li class="p-list-item">
+                            <div class="p-icon-circle" style="color: #ff3e3e; background: rgba(255,62,62,0.1)"><svg
+                                    width="24" height="24" viewBox="0 0 24 24">
+                                    <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                                    <polyline points="2 17 12 22 22 17" />
+                                    <polyline points="2 12 12 17 22 12" />
+                                </svg></div>
+                            <span>Shadow Knowledge Silos</span>
+                        </li>
+                        <li class="p-list-item">
+                            <div class="p-icon-circle"><svg width="24" height="24" viewBox="0 0 24 24">
+                                    <rect x="4" y="4" width="16" height="16" rx="2" ry="2" />
+                                    <rect x="9" y="9" width="6" height="6" />
+                                    <line x1="9" y1="1" x2="9" y2="4" />
+                                    <line x1="15" y1="1" x2="15" y2="4" />
+                                    <line x1="9" y1="20" x2="9" y2="23" />
+                                    <line x1="15" y1="20" x2="15" y2="23" />
+                                    <line x1="20" y1="9" x2="23" y2="9" />
+                                    <line x1="20" y1="15" x2="23" y2="15" />
+                                    <line x1="1" y1="9" x2="4" y2="9" />
+                                    <line x1="1" y1="15" x2="4" y2="15" />
+                                </svg></div>
+                            <span>Disconnected AI Agents</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: ENGINE -->
+    <section class="p-section">
+        <div class="p-section-inner">
+            <div class="p-glass-card scroll-reveal">
+                <span class="p-tag">The Engine</span>
+                <h2 class="p-title-standard">GIT-NATIVE<span class="p-serif text-accent"> ROOMS</span></h2>
+                <p class="p-subtitle">Every DevRoom targets a specific Git repository, bridging the gap between chat and
+                    codebase.</p>
+                <div class="p-grid-content">
+                    <div style="display: grid; gap: 1.5rem;">
+                        <div class="p-stat-box flex items-center gap-4">
+                            <svg width="24" height="24" viewBox="0 0 24 24" class="text-accent">
+                                <polyline points="16 18 22 12 16 6" />
+                                <polyline points="8 6 2 12 8 18" />
+                            </svg>
+                            <div>
+                                <h4 style="font-weight: 800;">Repo Targeting</h4>
+                                <p class="text-sm" style="color: var(--p-text-dim);">Connect any GitHub/GitLab URL to a
+                                    room.</p>
+                            </div>
+                        </div>
+                        <div class="p-stat-box flex items-center gap-4">
+                            <svg width="24" height="24" viewBox="0 0 24 24" class="text-accent">
+                                <path
+                                    d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                                <path
+                                    d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                                <path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3" />
+                                <path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5" />
+                            </svg>
+                            <div>
+                                <h4 style="font-weight: 800;">Zero-Config</h4>
+                                <p class="text-sm" style="color: var(--p-text-dim);">The system prepares the environment
+                                    instantly.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-terminal">
+                        <div class="p-terminal-header">
+                            <div class="dot" style="background: #ff5f56;"></div>
+                            <div class="dot" style="background: #ffbd2e;"></div>
+                            <div class="dot" style="background: #27c93f;"></div>
+                        </div>
+                        <div style="color: var(--p-accent); font-family: var(--font-mono);">
+                            $ devrooms connect hackathon/api<br>
+                            <span style="color: #666;">[System] Analyzing repository structure...</span><br>
+                            <span style="color: #4ade80;">[Success] Room #api-core connected.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: DEPLOYMENT -->
+    <section class="p-section">
+        <div class="p-section-inner">
+            <div class="p-glass-card scroll-reveal">
+                <span class="p-tag">Deployment</span>
+                <h2 class="p-title-standard">AUTO<span class="p-serif text-accent"> CLONING</span></h2>
+                <p class="p-subtitle">If the repo isn't already in your workspace, DevRooms.ai clones it automatically
+                    and indexes the context.</p>
+                <div class="p-grid-content">
+                    <div class="p-stat-box"
+                        style="height: 100%; display: flex; flexDirection: column; justifyContent: center;">
+                        <span class="p-stat-value">Instant</span>
+                        <span class="p-stat-label">Full Workspace Sync</span>
+                        <p class="text-sm" style="color: var(--p-text-dim); margin-top: 1rem;">Automated indexing
+                            ensures the AI knows every file and module before you even type.</p>
+                    </div>
+                    <div style="display: grid; gap: 1rem;">
+                        <div class="p-stat-box" style="padding: 1.5rem;">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    style="width: 10px; height: 10px; border-radius: 50%; background: var(--p-accent);">
+                                </div>
+                                <span class="text-sm font-bold tracking-widest uppercase">cloning repo... 85%</span>
+                            </div>
+                        </div>
+                        <div class="p-stat-box" style="padding: 1.5rem;">
+                            <div class="flex items-center gap-4">
+                                <div style="width: 10px; height: 10px; border-radius: 50%; background: #4ade80;"></div>
+                                <span class="text-sm font-bold tracking-widest uppercase text-accent">context
+                                    ready</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: SOCKET -->
+    <section class="p-section">
+        <div class="p-section-inner">
+            <div class="p-glass-card scroll-reveal">
+                <span class="p-tag">Network</span>
+                <h2 class="p-title-standard">SOCKET<span class="p-serif text-accent"> POWERED</span></h2>
+                <p class="p-subtitle">Real-time multi-user synchronization. Experience zero-latency collaboration across
+                    chat and agent status.</p>
+                <div class="p-grid-content">
+                    <div style="display: grid; gap: 1.5rem;">
+                        <div class="p-stat-box flex items-center gap-4">
+                            <svg width="24" height="24" viewBox="0 0 24 24" class="text-accent">
+                                <circle cx="18" cy="5" r="3" />
+                                <circle cx="6" cy="12" r="3" />
+                                <circle cx="18" cy="19" r="3" />
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                            </svg>
+                            <div>
+                                <h4 style="font-weight: 800;">Bi-Directional Sync</h4>
+                                <p class="text-sm" style="color: var(--p-text-dim);">Instant message delivery across all
+                                    participants.</p>
+                            </div>
+                        </div>
+                        <div class="p-stat-box flex items-center gap-4">
+                            <svg width="24" height="24" viewBox="0 0 24 24" class="text-accent">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                            <div>
+                                <h4 style="font-weight: 800;">Presence System</h4>
+                                <p class="text-sm" style="color: var(--p-text-dim);">See who is active in the room and
+                                    what they are editing.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-stat-box" style="background: rgba(0,242,255,0.03);">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background: #333"></div>
+                            <div style="flex: 1;">
+                                <div
+                                    style="height: 10px; width: 60%; background: rgba(255,255,255,0.1); margin-bottom: 6px;">
+                                </div>
+                                <div style="height: 8px; width: 40%; background: rgba(255,255,255,0.05);"></div>
+                            </div>
+                        </div>
+                        <p class="p-serif" style="font-size: 1.25rem; opacity: 0.8;">"Socket.io enables the heartbeat of
+                            the devroom."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: WORKFLOW -->
+    <section class="p-section">
+        <div class="p-section-inner">
+            <div class="p-glass-card scroll-reveal">
+                <span class="p-tag">The Workflow</span>
+                <h2 class="p-title-standard">AGENTIC<span class="p-serif text-accent"> EDITING</span></h2>
+                <p class="p-subtitle">AI Agents don't just chat—they work. Agents navigate folders, modify files, and
+                    fix bugs autonomously.</p>
+                <div class="p-grid-content">
+                    <ul class="p-list">
+                        <li class="p-list-item">
+                            <div class="p-icon-circle"><svg width="24" height="24" viewBox="0 0 24 24">
+                                    <rect x="4" y="4" width="16" height="16" rx="2" ry="2" />
+                                    <rect x="9" y="9" width="6" height="6" />
+                                    <line x1="9" y1="1" x2="9" y2="4" />
+                                    <line x1="15" y1="1" x2="15" y2="4" />
+                                    <line x1="9" y1="20" x2="9" y2="23" />
+                                    <line x1="15" y1="20" x2="15" y2="23" />
+                                    <line x1="20" y1="9" x2="23" y2="9" />
+                                    <line x1="20" y1="15" x2="23" y2="15" />
+                                    <line x1="1" y1="9" x2="4" y2="9" />
+                                    <line x1="1" y1="15" x2="4" y2="15" />
+                                </svg></div>
+                            <span>Autonomous Action Proposals</span>
+                        </li>
+                        <li class="p-list-item">
+                            <div class="p-icon-circle"><svg width="24" height="24" viewBox="0 0 24 24">
+                                    <path
+                                        d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                                </svg></div>
+                            <span>Multi-File Refactoring</span>
+                        </li>
+                    </ul>
+                    <div class="p-terminal">
+                        <code style="color: var(--p-accent)">@ai fix auth.jsx and update types</code><br>
+                        <code style="color: #666">[Agent] Modifying src/auth/logic.js...</code><br>
+                        <code style="color: #4ade80">[Done] Proposing internal diff.</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: SAFETY -->
+    <section class="p-section">
+        <div class="p-section-inner">
+            <div class="p-glass-card scroll-reveal">
+                <span class="p-tag">Safety First</span>
+                <h2 class="p-title-standard">TRUSTED<span class="p-serif text-accent"> GATE</span></h2>
+                <p class="p-subtitle">Nothing goes to production without your eyes. Review, test, and approve every line
+                    before it leaves the room.</p>
+                <div class="p-grid-content">
+                    <div class="p-stat-box">
+                        <h4 style="font-weight: 800; margin-bottom: 1.5rem;">Human Review</h4>
+                        <div
+                            style="background: #111; padding: 1rem; border-radius: 12px; font-size: 0.8rem; font-family: var(--font-mono);">
+                            <div style="color: #f85149;">- return data.map(i =&gt; i.val);</div>
+                            <div style="color: #3fb950;">+ return data?.map(i =&gt; i.val) || [];</div>
+                        </div>
+                        <div class="flex gap-4" style="margin-top: 1.5rem;">
+                            <button
+                                style="background: #4ade80; color: black; padding: 8px 20px; border-radius: 8px; border: none; font-weight: 800; cursor: pointer;">APPROVE</button>
+                        </div>
+                    </div>
+                    <div style="display: grid; gap: 1rem;">
+                        <div class="p-stat-box flex items-center gap-4">
+                            <svg width="24" height="24" viewBox="0 0 24 24" class="text-accent">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                            <span class="font-bold">Automated Verification</span>
+                        </div>
+                        <div class="p-stat-box flex items-center gap-4">
+                            <svg width="24" height="24" viewBox="0 0 24 24" class="text-accent">
+                                <line x1="18" y1="20" x2="18" y2="10" />
+                                <line x1="12" y1="20" x2="12" y2="4" />
+                                <line x1="6" y1="20" x2="6" y2="14" />
+                            </svg>
+                            <span class="font-bold">Test Suite Feedback</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: DELIVERY -->
+    <section class="p-section">
+        <div class="p-section-inner">
+            <div class="p-glass-card scroll-reveal">
+                <span class="p-tag">Delivery</span>
+                <h2 class="p-title-standard">SECURE<span class="p-serif text-accent"> PUSH</span></h2>
+                <p class="p-subtitle">Once approved, DevRooms.ai pushes the changes back to your Git provider, closing
+                    the loop.</p>
+                <div class="p-grid-content">
+                    <div style="display: grid; gap: 1.5rem;">
+                        <div class="p-stat-box flex items-center gap-4">
+                            <svg width="24" height="24" viewBox="0 0 24 24" class="text-accent">
+                                <circle cx="18" cy="18" r="3" />
+                                <circle cx="6" cy="6" r="3" />
+                                <path d="M13 6h3a2 2 0 0 1 2 2v7" />
+                                <line x1="6" y1="9" x2="6" y2="21" />
+                            </svg>
+                            <div>
+                                <h4 style="font-weight: 800;">Auto-Push</h4>
+                                <p class="text-sm" style="color: var(--p-text-dim);">Pushes to your branch upon
+                                    approval.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-terminal">
+                        <code style="color: #666;">[System] Testing changes... Passed.</code><br>
+                        <code style="color: #666;">[System] Pushing to origin/main...</code><br>
+                        <code style="color: #4ade80;">[Success] Commit b5f2a1 pushed.</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: TOOLBOX -->
+    <section class="p-section">
+        <div class="p-section-inner">
+            <div class="p-glass-card scroll-reveal">
+                <span class="p-tag">The Toolbox</span>
+                <h2 class="p-title-standard">AI COMMAND<span class="p-serif text-accent"> CENTER</span></h2>
+                <p class="p-subtitle">One mention. Targeted actions. The AI reads the entire thread to provide the
+                    perfect fix.</p>
+                <div class="p-grid-content">
+                    <div class="p-stat-box">
+                        <span class="p-tag" style="margin: 0;">@ai fix</span>
+                        <p class="text-sm" style="margin-top: 10px; color: var(--p-text-dim);">Instant bug patches</p>
+                    </div>
+                    <div class="p-stat-box">
+                        <span class="p-tag" style="margin: 0; color: #d2a8ff;">@ai refactor</span>
+                        <p class="text-sm" style="margin-top: 10px; color: var(--p-text-dim);">Clean, optimal code</p>
+                    </div>
+                    <div class="p-stat-box">
+                        <span class="p-tag" style="margin: 0; color: #7ee787;">@ai tests</span>
+                        <p class="text-sm" style="margin-top: 10px; color: var(--p-text-dim);">Generate unit tests</p>
+                    </div>
+                    <div class="p-stat-box">
+                        <span class="p-tag" style="margin: 0; color: #79c0ff;">@ai explain</span>
+                        <p class="text-sm" style="margin-top: 10px; color: var(--p-text-dim);">Code walkthroughs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10: CONCLUSION -->
+    <section class="p-section">
+        <div class="p-section-inner">
+            <div class="p-glass-card scroll-reveal" style="text-align: center;">
+                <span class="p-tag">Conclusion</span>
+                <h2 class="p-title-standard">FUTURE OF<span class="p-serif text-accent"> DEV</span></h2>
+                <p class="p-subtitle" style="margin-left: auto; margin-right: auto;">Built with passion by
+                    HackathonTeam. Context-driven engineering starts here.</p>
+                <div style="margin-top: 3rem;">
+                    <a href="https://dev-chatrooms-h1vkq4p77-schalltens-projects.vercel.app/" class="launch-btn-large">Launch MVP</a>
+                </div>
+                <p style="margin-top: 3rem; color: var(--p-text-dim); font-size: 0.9rem;">© 2026 HackathonTeam —
+                    Real-time Git Intelligence</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Scroll Reveal Logic
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
