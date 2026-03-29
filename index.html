@@ -4,134 +4,125 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abhinav | Systems & Backend Developer</title>
+  <title>abhinav | developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300..700&display=swap"
+  <script src="https://schallten.github.io/security.js"></script>
+  <script src="security.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-  <header>
-    <h1>ABHINAV</h1>
-  </header>
-
-  <nav>
-    <div class="nav-container">
-      <a href="#intro">01 Intro</a>
-      <a href="#skills">02 Skills</a>
-      <a href="#projects">03 Projects</a>
-      <a href="#contact">04 Contact</a>
-    </div>
-  </nav>
-
-  <main>
-    <section id="intro" data-number="01">
-      <div class="section-header">
-        <h2>Systems Developer</h2>
-        <div class="intro-subtitle">B.Tech Student & Low-Level Enthusiast</div>
+<body class="noise">
+  <div class="container">
+    <header>
+      <div class="header-left">
+        <img src="https://avatars.githubusercontent.com/u/166111488?v=4" alt="abhinav" class="avatar pulse-glow">
+        <span class="name">abhinav</span>
       </div>
-      <div class="intro-content">
-        <div class="intro-text">
-          Building from the ground up. I specialize in systems programming, custom compilers, and backend architecture.
-          A 6-year Linux daily driver with a passion for understanding the "how" behind the hardware-software interface.
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" data-number="02">
-      <h2>Skills</h2>
-
-      <div class="skills-grid">
-        <div class="skill-block">
-          <h4>Languages</h4>
-          <p><strong>Primary:</strong> C++, Python, Go, JavaScript, Bash</p>
-        </div>
-
-        <div class="skill-block">
-          <h4>Systems & Embedded</h4>
-          <p>ESP8266, LittleFS, I2C, OS Kernel Basics, Task Scheduling</p>
-        </div>
-
-        <div class="skill-block">
-          <h4>Frameworks & Tools</h4>
-          <p>FastAPI, Flask, React, Docker, Nginx, Git, GDB, Neovim</p>
-        </div>
-
-        <div class="skill-block">
-          <h4>Databases</h4>
-          <p>PostgreSQL, SQLite, MySQL</p>
+      <div class="header-right">
+        <nav>
+          <a href="projects.html">projects</a>
+        </nav>
+        <div class="controls">
+          <button class="icon-btn theme-toggle" aria-label="Toggle Theme">
+            <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+            <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
         </div>
       </div>
-    </section>
+    </header>
 
-    <section id="projects" data-number="03">
-      <h2>Projects</h2>
+    <main>
+      <section class="intro">
+        <p>Hello! I am a software developer with a passion for <span class="highlight-alt">Linux systems
+            engineering</span> and <span class="highlight-alt">minimalist design</span>.</p>
+        <p>I spend most of my time in the terminal, building systems-level software. Currently, I am focused on <span
+            class="highlight-alt">compilers</span> and exploring <span class="highlight-alt">low-level machine
+            architecture</span>.</p>
+        <p>I am currently developing <span class="link-inline-alt">system operating</span>. I'm open to new
+          opportunities—contact me
+          via <a href="https://www.linkedin.com/in/abhinav-592907335/" class="link-inline-alt">LinkedIn</a>, <a
+            href="https://github.com/schallten" class="link-inline-alt">GitHub</a>, or my <a href="resume.pdf"
+            class="link-inline-alt">Resume</a>.</p>
+      </section>
 
-      <div class="projects-list">
-        <div class="project-item">
-          <div class="project-meta">
-            <h3>Microcontroller OS</h3>
-            <span class="project-stack">C++, ESP8266, LittleFS</span>
+      <section class="quick-links">
+        <a href="resume.pdf" class="nav-link-alt">Resume</a>
+        <a href="https://github.com/schallten" class="nav-link-alt">GitHub</a>
+        <a href="https://www.linkedin.com/in/abhinav-592907335/" class="nav-link-alt">LinkedIn</a>
+      </section>
+
+      <section id="featured-projects" class="featured-projects">
+        <h2 class="section-title">featured</h2>
+        <div class="project-grid">
+          <div class="project-card-alt">
+            <div class="img-container-alt">
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800"
+                alt="Microcontroller OS">
+            </div>
+            <h3 class="project-name">microcontroller os</h3>
+            <p class="project-desc">experimental c++ environment for esp8266 with littlefs and shell utilities.</p>
           </div>
-          <div class="project-details">
-            <p>Experimental C++ environment for ESP8266 with LittleFS and shell utilities.</p>
-            <a href="https://github.com/schallten/system_operating" target="_blank" class="view-link">View Repo</a>
+          <div class="project-card-alt">
+            <div class="img-container-alt">
+              <img
+                src="https://media.licdn.com/dms/image/v2/D5622AQFx09cOs2YAyA/feedshare-shrink_480/B56ZtLhQ0dGwAY-/0/1766498570530?e=1776297600&v=beta&t=7Y7GcOL2lhvlA3kH0n_5PvbqtyfpyBUrZfzoZWnM_0Q"
+                alt="PMG">
+            </div>
+            <h3 class="project-name">pmg (poor man's git)</h3>
+            <p class="project-desc">custom version control system cli in go with a dedicated web dashboard for
+              repository tracking.</p>
           </div>
         </div>
+        <p class="more-link-text">you can check out all of them <a href="projects.html" class="nav-link-alt">here</a>
+        </p>
+      </section>
 
-        <div class="project-item">
-          <div class="project-meta">
-            <h3>Elin Language</h3>
-            <span class="project-stack">Python, C++, Virtual Machine</span>
-          </div>
-          <div class="project-details">
-            <p>A stack-based toy language featuring a Python compiler and a C++ Virtual Machine.</p>
-            <a href="https://github.com/schallten/elin" target="_blank" class="view-link">View Repo</a>
-          </div>
-        </div>
+      <section class="more-options">
+        <p><a href="projects.html" class="arrow-link-alt">view all work <span>&rarr;</span></a></p>
+      </section>
+    </main>
 
-        <div class="project-item">
-          <div class="project-meta">
-            <h3>PMG (Poor Man's Git)</h3>
-            <span class="project-stack">Go, FastAPI, React</span>
-          </div>
-          <div class="project-details">
-            <p>Custom VCS CLI in Go with a FastAPI/React web dashboard for repo hosting.</p>
-            <a href="https://github.com/schallten/pmg" target="_blank" class="view-link">View Repo</a>
-          </div>
-        </div>
-
-        <div class="project-item">
-          <div class="project-meta">
-            <h3>VN-Core</h3>
-            <span class="project-stack">DSL, Pygame, Python</span>
-          </div>
-          <div class="project-details">
-            <p>High-performance Visual Novel engine with a custom DSL and Pygame renderer.</p>
-            <a href="https://github.com/schallten/VN-Core" target="_blank" class="view-link">View Repo</a>
-          </div>
-        </div>
+    <footer>
+      <div class="footer-left">
+        &copy; 2026 Abhinav
       </div>
-    </section>
-
-    <section id="contact" data-number="04">
-      <h2>Contact</h2>
-      <div class="contact-content">
-        <ul class="contact-list">
-          <li><a href="https://www.linkedin.com/in/abhinav-592907335/" target="_blank">LinkedIn</a></li>
-          <li><a href="https://github.com/schallten" target="_blank">GitHub</a></li>
-          <li><a href="resume.pdf" target="_blank">Resume.pdf</a></li>
-        </ul>
+      <div class="footer-right">
+        Systems Developer
       </div>
-    </section>
-  </main>
+    </footer>
+  </div>
+  <script>
+    const themeToggle = document.querySelector('.theme-toggle');
+    const root = document.documentElement;
 
-  <footer>
-    <p>© 2026 ABHINAV. ALL RIGHTS RESERVED.</p>
-  </footer>
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') root.classList.add('light-mode');
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        root.classList.toggle('light-mode');
+        const isLight = root.classList.contains('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      });
+    }
+  </script>
 </body>
 
 </html>
