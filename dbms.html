@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ER Diagram AI Generator | Premium Tool</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@300;600;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-glow: rgba(14, 165, 233, 0.3);
+            --bg: #020617;
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent: #8b5cf6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.15) 0%, transparent 40%);
+        }
+
+        #app {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .sidebar {
+            background: var(--card-bg);
+            backdrop-filter: blur(30px);
+            border-right: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .main-content {
+            padding: 2.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-height: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        header {
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        p.subtitle {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        input,
+        textarea {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 1rem;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.5;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        button {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 1.1rem;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.3);
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -5px rgba(59, 130, 246, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            width: fit-content;
+        }
+
+        .btn-small {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.8rem;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            box-shadow: none;
+        }
+
+        .btn-small:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border-color: var(--glass-border);
+        }
+
+        .editor-container {
+            margin-top: 0.5rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1rem;
+            border: 1px solid var(--glass-border);
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .spinner {
+            width: 22px;
+            height: 22px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-left-color: #fff;
+            border-radius: 50%;
+            animation: spin .6s linear infinite;
+        }
+
+        .error-message {
+            color: #f87171;
+            background: rgba(248, 113, 113, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(248, 113, 113, 0.2);
+            font-size: 0.8rem;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal {
+            background: #0f172a;
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            max-width: 650px;
+            width: 100%;
+            max-height: 85vh;
+            padding: 3rem;
+            position: relative;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: 0.2s;
+        }
+
+        .close-btn:hover {
+            color: white;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .code-editor {
+            width: 100%;
+            border-radius: 12px;
+            background: #020617;
+            color: #94a3b8;
+            font-family: monospace;
+            font-size: 0.85rem;
+            padding: 1rem;
+            border: 1px solid var(--glass-border);
+            line-height: 1.5;
+            resize: vertical;
+        }
+    </style>
+    <script type="importmap">
+        {
+            "imports": {
+                "preact": "https://esm.sh/preact",
+                "preact/hooks": "https://esm.sh/preact/hooks",
+                "mermaid": "https://esm.sh/mermaid@10",
+                "svg-pan-zoom": "https://esm.sh/svg-pan-zoom@3.6.1"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="module">
+        import { h, render } from 'preact';
+        import { useState, useEffect, useRef } from 'preact/hooks';
+        import mermaid from 'mermaid';
+        import svgPanZoom from 'svg-pan-zoom';
+
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            securityLevel: 'loose',
+            fontFamily: 'Inter',
+            er: { useMaxWidth: false }
+        });
+
+        const Sidebar = ({ apiKey, setApiKey, question, setQuestion, handleSubmit, loading, error, setDiagram, convertToMermaid }) => (
+            h('aside', { class: 'sidebar' }, [
+                h('header', null, [
+                    h('h1', null, 'ER MAKER'),
+                    h('p', { class: 'subtitle' }, 'A simple tool to turn your database ideas into diagrams.')
+                ]),
+                h('div', { class: 'input-group' }, [
+                    h('div', { class: 'field' }, [
+                        h('label', null, 'Gemini API Key'),
+                        h('input', {
+                            type: 'password',
+                            placeholder: 'Securely stored in localStorage...',
+                            value: apiKey,
+                            onInput: (e) => setApiKey(e.target.value)
+                        })
+                    ]),
+                    h('div', { class: 'field' }, [
+                        h('label', null, 'Schema Definition'),
+                        h('textarea', {
+                            rows: 10,
+                            placeholder: 'Describe your tables and relations...',
+                            value: question,
+                            onInput: (e) => setQuestion(e.target.value)
+                        })
+                    ]),
+                    error && h('div', { class: 'error-message' }, error),
+                    h('button', {
+                        style: 'margin-top: 1rem;',
+                        onClick: handleSubmit,
+                        disabled: loading
+                    }, [
+                        loading ? h('div', { class: 'spinner' }) : 'Generate Diagram',
+                    ]),
+                    h('button', {
+                        onClick: () => {
+                            setQuestion('A university system. Students enroll in Courses. Courses are taught by Professors. Departments manage multiple Courses.');
+                            const mockData = {
+                                "entities": [
+                                    { "name": "Student", "attributes": ["id", "name", "email"] },
+                                    { "name": "Course", "attributes": ["course_id", "title"] },
+                                    { "name": "Professor", "attributes": ["prof_id", "name"] },
+                                    { "name": "Department", "attributes": ["dept_id", "name"] }
+                                ],
+                                "relationships": [
+                                    { "from": "Student", "to": "Course", "label": "enrolled_in" },
+                                    { "from": "Professor", "to": "Course", "label": "teaches" },
+                                    { "from": "Department", "to": "Course", "label": "offers" }
+                                ]
+                            };
+                            setDiagram(convertToMermaid(mockData));
+                        },
+                        disabled: loading,
+                        style: 'background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); box-shadow: none; font-size: 0.8rem;'
+                    }, 'Load Sample Data')
+                ]),
+                h('footer', { style: 'margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--glass-border);' }, [
+                    h('p', { style: 'font-size: 0.75rem; color: var(--text-dim); line-height: 1.8;' }, [
+                        'Made by ',
+                        h('a', { href: 'https://github.com/schallten', target: '_blank', style: 'color: var(--primary); text-decoration: none; font-weight: 700;' }, 'schallten'),
+                        h('br'),
+                        h('span', { style: 'opacity: 0.6;' }, 'Explore my projects:'),
+                        h('br'),
+                        h('a', { href: 'https://schallten.github.io/system_operating/website/index.html', target: '_blank', style: 'color: var(--text-dim); text-decoration: underline; font-size: 0.7rem;' }, 'Pseudo OS (In Dev)')
+                    ])
+                ])
+            ])
+        );
+
+        const App = () => {
+            const [question, setQuestion] = useState('');
+            const [apiKey, setApiKey] = useState(() => localStorage.getItem('er_gen_api_key') || '');
+            const [diagram, setDiagram] = useState('');
+            const [explanation, setExplanation] = useState('');
+            const [showEditor, setShowEditor] = useState(false);
+            const [loading, setLoading] = useState(false);
+            const [explaining, setExplaining] = useState(false);
+            const [error, setError] = useState(null);
+            const diagramRef = useRef(null);
+
+            useEffect(() => {
+                localStorage.setItem('er_gen_api_key', apiKey);
+            }, [apiKey]);
+
+            const convertToMermaid = (data) => {
+                let m = 'erDiagram\n';
+                data.entities?.forEach(e => {
+                    const name = e.name.replace(/\s+/g, '_');
+                    m += `  ${name} {\n${e.attributes.map(a => `    string ${a.replace(/\s+/g, '_')}`).join('\n')}\n  }\n`;
+                });
+                data.relationships?.forEach(r => {
+                    m += `  ${r.from.replace(/\s+/g, '_')} ||--o{ ${r.to.replace(/\s+/g, '_')} : "${r.label || ''}"\n`;
+                });
+                return m;
+            };
+
+            const handleSubmit = async () => {
+                if (!apiKey) return setError('API Key is required.');
+                if (!question) return setError('Description is required.');
+                setLoading(true);
+                setError(null);
+                setDiagram('');
+                setExplanation('');
+                try {
+                    const prompt = `Convert this to an ER diagram JSON: "${question}". JSON structure: {"entities": [{"name": "string", "attributes": ["string"]}], "relationships": [{"from": "string", "to": "string", "label": "string"}]}. Output JSON only.`;
+                    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                    });
+                    if (!res.ok) throw new Error((await res.json()).error?.message || 'API Fail');
+                    const data = await res.json();
+                    const text = data.candidates[0].content.parts[0].text;
+                    const jsonMatch = text.match(/\{[\s\S]*\}/);
+                    if (!jsonMatch) throw new Error('Invalid response');
+                    setDiagram(convertToMermaid(JSON.parse(jsonMatch[0])));
+                } catch (err) { setError(err.message); } finally { setLoading(false); }
+            };
+
+            const handleExplain = async () => {
+                if (!diagram) return;
+                setExplaining(true);
+                setError(null);
+                try {
+                    const prompt = `Explain this ER diagram briefly for a DBMS exam. Focus on key entities, primary/foreign key logic, and cardinalities. Use bullet points. Keep it short and academic. Diagram:\n${diagram}`;
+                    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                    });
+                    if (!res.ok) throw new Error('Failed to explain');
+                    const data = await res.json();
+                    setExplanation(data.candidates[0].content.parts[0].text);
+                } catch (err) { setError(err.message); } finally { setExplaining(false); }
+            };
+
+            const copyCode = () => { navigator.clipboard.writeText(diagram); alert('Copied!'); };
+            const downloadSVG = () => {
+                const svg = diagramRef.current.querySelector('svg');
+                if (!svg) return;
+                const blob = new Blob([new XMLSerializer().serializeToString(svg)], { type: 'image/svg+xml' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'diagram.svg';
+                a.click();
+            };
+
+            useEffect(() => {
+                const renderMain = async () => {
+                    if (diagram && diagramRef.current) {
+                        try {
+                            const id = 'm' + Math.random().toString(36).substring(7);
+                            const { svg } = await mermaid.render(id, diagram);
+                            diagramRef.current.innerHTML = svg;
+                            const el = diagramRef.current.querySelector('svg');
+                            if (el) {
+                                el.style.width = '100%';
+                                el.style.height = '100%';
+                                el.style.maxWidth = 'none';
+                                svgPanZoom(el, { zoomEnabled: true, controlIconsEnabled: true, fit: true, center: true });
+                            }
+                        } catch (e) { console.error(e); }
+                    }
+                };
+                renderMain();
+            }, [diagram]);
+
+            return h('div', { class: 'container' }, [
+                h(Sidebar, { apiKey, setApiKey, question, setQuestion, handleSubmit, loading, error, setDiagram, convertToMermaid }),
+                h('main', { class: 'main-content' }, [
+                    diagram ? h('div', { style: 'height: 100%; display: flex; flex-direction: column; gap: 1.5rem;' }, [
+                        h('div', { class: 'toolbar' }, [
+                            h('button', { class: 'btn-small', onClick: copyCode }, 'Copy Code'),
+                            h('button', { class: 'btn-small', onClick: downloadSVG }, 'Download SVG'),
+                            h('button', { class: 'btn-small', onClick: handleExplain, disabled: explaining },
+                                explaining ? 'Explaining...' : 'Explain (Exam Mode)'),
+                            h('button', { class: 'btn-small', onClick: () => setShowEditor(!showEditor) },
+                                showEditor ? 'Hide Code' : 'Edit Source')
+                        ]),
+                        h('div', { class: 'card', style: 'flex: 1; min-height: 0; padding: 0.5rem; overflow: hidden; background: #020617; border: 1px solid var(--glass-border); border-radius: 16px;' }, [
+                            h('div', { ref: diagramRef, style: 'width: 100%; height: 100%;' })
+                        ]),
+                        showEditor && h('div', { class: 'editor-container' }, [
+                            h('label', { style: 'font-size: 0.7rem; margin-bottom: 0.5rem; display: block; font-weight: 800; color: var(--primary);' }, 'MERMAID CODE'),
+                            h('textarea', { class: 'code-editor', rows: 8, value: diagram, onInput: (e) => setDiagram(e.target.value) })
+                        ])
+                    ]) : h('div', { style: 'height: 100%; display: flex; align-items: center; justify-content: center; color: var(--text-dim);' }, [
+                        h('div', { style: 'text-align: center; max-width: 400px;' }, [
+                            h('div', { style: 'font-size: 6rem; margin-bottom: 2rem; opacity: 0.1;' }, '📊'),
+                            h('h2', { style: 'color: white; margin-bottom: 0.5rem; font-weight: 800;' }, 'Ready to Design?'),
+                            h('p', null, 'Summarize your database on the left to generate a visual schema.')
+                        ])
+                    ])
+                ]),
+                explanation && h('div', { class: 'modal-overlay', onClick: () => setExplanation('') }, [
+                    h('div', { class: 'modal', onClick: (e) => e.stopPropagation() }, [
+                        h('span', { class: 'close-btn', onClick: () => setExplanation('') }, '✕'),
+                        h('label', { style: 'font-size: 0.7rem; font-weight: 800; color: var(--primary); display: block; margin-bottom: 1.5rem;' }, 'EXAM-FOCUSED EXPLANATION'),
+                        h('div', {
+                            style: 'font-size: 1rem; line-height: 1.8; color: var(--text-main); white-space: pre-wrap;',
+                            dangerouslySetInnerHTML: { __html: explanation.split('\n').map(l => l.trim().startsWith('*') ? `• ${l.trim().substring(1)}` : l).join('<br/>') }
+                        })
+                    ])
+                ])
+            ]);
+        };
+
+        render(h(App), document.getElementById('app'));
+    </script>
+</body>
+
+</html>
