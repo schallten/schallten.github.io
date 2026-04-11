@@ -362,6 +362,53 @@ footer .footer-right {
   font-variant-numeric: tabular-nums;
 }
 
+/* Top Banner */
+.top-banner {
+  background: linear-gradient(90deg, var(--card-bg), var(--accent-muted), var(--card-bg));
+  background-size: 200% 100%;
+  animation: banner-gradient 8s ease infinite;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: 100%;
+  position: relative;
+  z-index: 100;
+}
+
+@keyframes banner-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.top-banner a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  margin-left: 10px;
+  padding-bottom: 1px;
+  transition: all 0.2s ease;
+}
+
+.top-banner a:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
+}
+
+.top-banner marquee {
+  display: flex;
+  align-items: center;
+}
+
+.banner-content {
+  display: inline-block;
+  padding-right: 100px;
+}
+
 /* Back Link for internal pages */
 .back-link {
   text-decoration: none;
