@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>schallten | dev portfolio</title>
+    <style>
+        :root {
+            --bg: #FFFFFF;
+            --fg: #000000;
+            --card-bg: #FFFFFF;
+            --card-border: #000000;
+            --shadow: #CCCCCC;
+            --sub-bg: #F0F0F0;
+            --profile-bg: #FEFEF5;
+            --h2-bg: #F9F9E0;
+            --h3-bg: #E6E6E6;
+            --skill-bg: #FCFCF0;
+            --table-head: #E0E0E0;
+            --note-bg: #FFFFF0;
+            --fact-bg: #FDF8E7;
+            --fact-hover: #FFF2DF;
+            --highlight-bg: #FFFF99;
+            --blink-bg: #FFFFC0;
+            --hr-color: #111;
+            --thin-hr: #333;
+            --btn-bg: #EEEEEE;
+            --btn-border: #777;
+            --btn-active: #CCCCCC;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0d0d0d;
+            --fg: #e0e0e0;
+            --card-bg: #111111;
+            --card-border: #444444;
+            --shadow: #333333;
+            --sub-bg: #1a1a1a;
+            --profile-bg: #141414;
+            --h2-bg: #1c1c00;
+            --h3-bg: #222222;
+            --skill-bg: #161616;
+            --table-head: #222222;
+            --note-bg: #131300;
+            --fact-bg: #111108;
+            --fact-hover: #1a1500;
+            --highlight-bg: #3a3a00;
+            --blink-bg: #2a2a00;
+            --hr-color: #444;
+            --thin-hr: #333;
+            --btn-bg: #222222;
+            --btn-border: #555555;
+            --btn-active: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'Courier New', 'Lucida Sans Typewriter', 'Times New Roman', monospace;
+            color: var(--fg);
+            padding: 32px 24px 48px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .portfolio-wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 3px solid var(--card-border);
+            padding: 28px 30px 35px;
+            box-shadow: 12px 12px 0px var(--shadow);
+        }
+
+        hr {
+            border: none;
+            border-top: 2px dashed var(--hr-color);
+            margin: 20px 0;
+        }
+
+        .thin-hr {
+            border-top: 1px dotted var(--thin-hr);
+            margin: 18px 0;
+        }
+
+        blink,
+        .blink-text {
+            animation: blinkOld 1.1s step-start infinite;
+            background: var(--blink-bg);
+            color: var(--fg);
+            padding: 0 5px;
+            font-weight: bold;
+        }
+
+        @keyframes blinkOld {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            font-family: 'Times New Roman', serif;
+            font-size: 48px;
+            letter-spacing: -1px;
+            font-weight: 900;
+            border-bottom: 5px double var(--fg);
+            border-left: 14px solid var(--fg);
+            padding-left: 20px;
+            margin-bottom: 8px;
+            margin-top: 6px;
+            color: var(--fg);
+        }
+
+        .portfolio-sub {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            background: var(--sub-bg);
+            color: var(--fg);
+            display: inline-block;
+            padding: 5px 12px;
+            border: 1px solid var(--card-border);
+            margin-bottom: 18px;
+        }
+
+        h2 {
+            font-family: 'Times New Roman', serif;
+            font-size: 28px;
+            font-weight: bold;
+            border-left: 8px solid var(--fg);
+            padding-left: 14px;
+            margin: 28px 0 16px 0;
+            background: var(--h2-bg);
+            color: var(--fg);
+            display: inline-block;
+        }
+
+        h3 {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            background: var(--h3-bg);
+            color: var(--fg);
+            display: inline-block;
+            padding: 4px 10px;
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
+            margin: 10px 0 12px 0;
+        }
+
+        .profile-portfolio {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            background: var(--profile-bg);
+            border: 2px solid var(--card-border);
+            padding: 22px 24px;
+            margin: 20px 0;
+        }
+
+        .avatar-area {
+            flex: 1;
+            min-width: 170px;
+            text-align: center;
+            border-right: 2px solid var(--card-border);
+            padding-right: 20px;
+        }
+
+        .old-frame {
+            background: var(--card-bg);
+            border: 4px ridge #555;
+            padding: 8px;
+            display: inline-block;
+        }
+
+        .bio-area {
+            flex: 2.5;
+        }
+
+        .bio-area p {
+            margin-bottom: 14px;
+            font-size: 15px;
+            line-height: 1.45;
+            font-family: 'Georgia', serif;
+            color: var(--fg);
+        }
+
+        .highlight {
+            background: var(--highlight-bg);
+            color: var(--fg);
+            font-weight: bold;
+            padding: 0 4px;
+            border-left: 2px solid var(--fg);
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .skill-card {
+            background: var(--skill-bg);
+            border: 2px solid var(--card-border);
+            color: var(--fg);
+            padding: 14px 16px;
+            transition: 0.05s linear;
+        }
+
+        .skill-card strong {
+            font-size: 18px;
+            display: block;
+            border-bottom: 1px dotted var(--fg);
+            margin-bottom: 8px;
+        }
+
+        .retro-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            margin: 18px 0;
+            font-family: 'Courier New', monospace;
+            color: var(--fg);
+        }
+
+        .retro-table th,
+        .retro-table td {
+            border: 1px solid var(--card-border);
+            padding: 8px 12px;
+            vertical-align: top;
+        }
+
+        .retro-table th {
+            background: var(--table-head);
+            font-weight: bold;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 25px 0;
+        }
+
+        .project-item {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            color: var(--fg);
+            padding: 16px 18px;
+            box-shadow: 5px 5px 0px var(--shadow);
+        }
+
+        .project-item h4 {
+            font-size: 20px;
+            border-left: 5px solid #AA4A6E;
+            padding-left: 8px;
+            margin-bottom: 10px;
+            color: var(--fg);
+        }
+
+        .project-item a {
+            color: var(--fg);
+        }
+
+        .old-button {
+            background: var(--btn-bg);
+            border: 3px outset var(--btn-border);
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--fg);
+            padding: 6px 16px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .old-button:active {
+            border: 3px inset var(--btn-border);
+            background: var(--btn-active);
+        }
+
+        .dark-toggle {
+            background: var(--btn-bg);
+            border: 2px solid var(--card-border);
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: var(--fg);
+            padding: 4px 10px;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 11px;
+            border-top: 2px dotted var(--card-border);
+            padding-top: 20px;
+            font-family: monospace;
+            color: var(--fg);
+        }
+
+        footer a {
+            color: var(--fg);
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 16px;
+            }
+
+            .portfolio-wrap {
+                padding: 16px;
+            }
+
+            .avatar-area {
+                border-right: none;
+                border-bottom: 2px solid var(--card-border);
+                padding-bottom: 15px;
+            }
+
+            .profile-portfolio {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="portfolio-wrap">
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px;">
+            <div>
+                <h1>🖥️ SCHALLTEN 🖥️</h1>
+                <div class="portfolio-sub">⚡ BACKEND DEVELOPER | RETRO TERMINAL ⚡</div>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center;">
+                <button class="dark-toggle" id="darkToggle">[ DARK MODE ]</button>
+                <div style="background:var(--fg); color:var(--bg); padding: 5px 10px; font-size:12px;">
+                    <a href="index.html" style="color:inherit; text-decoration:none;">&larr; Standard Mode</a>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <!-- Bio area -->
+        <div class="profile-portfolio">
+            <div class="avatar-area">
+                <div class="old-frame">
+                    <img src="https://avatars.githubusercontent.com/u/166111488?v=4" alt="schallten" width="120"
+                        style="filter: grayscale(100%) contrast(150%);">
+                </div>
+                <div class="blink-text" style="margin-top: 12px;">✦ schallten ✦</div>
+                <div style="font-size:12px;">[ github.com/schallten ]</div>
+            </div>
+            <div class="bio-area">
+                <p><span class="highlight">◉ Handle</span> <strong>schallten</strong> | Backend developer, occasional
+                    full-stack. Builds things that run quietly and correctly.</p>
+                <p><span class="highlight">🎯 Focus</span> API design, server-side architecture, CLI tooling, and
+                    low-level systems when the pull is too strong.</p>
+                <p><span class="highlight">📌 Current Work</span> Building backend services and exploring language
+                    internals. Actively contributing via <a href="https://github.com/schallten"
+                        style="color:var(--fg);">GitHub</a>.</p>
+                <p><span class="highlight">📬 Contact</span> <a href="https://www.linkedin.com/in/abhinav-592907335/"
+                        style="color:var(--fg);">LinkedIn</a> &nbsp;|&nbsp; <a href="https://github.com/schallten"
+                        style="color:var(--fg);">GitHub</a> &nbsp;|&nbsp; <a href="resume.pdf"
+                        style="color:var(--fg);">Resume</a></p>
+            </div>
+        </div>
+
+        <!-- Skill Table -->
+        <h2>✦ Core Stack ✦</h2>
+        <table class="retro-table">
+            <thead>
+                <tr>
+                    <th>Skill</th>
+                    <th>Level/Focus</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="highlight">🐹 Go (Golang)</td>
+                    <td>Primary Backend</td>
+                    <td>Building CLIs, REST APIs, and custom tooling. Strong preference for minimal dependencies.</td>
+                </tr>
+                <tr>
+                    <td class="highlight">🐍 Python</td>
+                    <td>Backend / Scripting</td>
+                    <td>FastAPI services, automation scripts, and AI middleware layers.</td>
+                </tr>
+                <tr>
+                    <td class="highlight">⚙️ C++</td>
+                    <td>Low-level</td>
+                    <td>Embedded development, microcontroller environments, and performance-critical code.</td>
+                </tr>
+                <tr>
+                    <td class="highlight">🗄️ APIs & Services</td>
+                    <td>Full Stack Aware</td>
+                    <td>REST, proxy middleware, rate-limiting, provider aggregation. Can wire up a frontend when needed.
+                    </td>
+                </tr>
+                <tr>
+                    <td class="highlight">🐧 Linux</td>
+                    <td>Daily Driver</td>
+                    <td>Shell scripting, process management, and server configuration.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Projects -->
+        <h2>🏆 Featured Projects</h2>
+        <div class="project-grid">
+            <div class="project-item">
+                <h4>📦 pmg (poor man's git)</h4>
+                <p>Custom version control system CLI in Go with a dedicated web dashboard for repository tracking.</p>
+                <div style="font-size:12px; margin-top:8px;">⭐ Backend, Go, Web Dashboard</div>
+            </div>
+            <div class="project-item">
+                <h4>🤖 rta</h4>
+                <p>AI-assisted code editor with a surprisingly small memory footprint. Python backend with
+                    multi-provider AI aggregation.</p>
+                <div style="font-size:12px; margin-top:8px;"><a href="https://rta-three.vercel.app/"
+                        style="text-decoration: underline;">Explore Project</a></div>
+            </div>
+            <div class="project-item">
+                <h4>💾 microcontroller os</h4>
+                <p>Experimental C++ environment for esp8266 with littlefs and shell utilities.</p>
+                <div style="font-size:12px; margin-top:8px;">⭐ Embedded, C++</div>
+            </div>
+            <div class="project-item">
+                <h4>⚙️ System Operating</h4>
+                <p>Systems-level project currently in development. Focused on control and minimal overhead.</p>
+                <div style="font-size:12px; margin-top:8px;">⭐ Status: WIP</div>
+            </div>
+        </div>
+
+        <!-- Traits -->
+        <h3>🔹 Traits</h3>
+        <div class="skill-grid">
+            <div class="skill-card"><strong>🛠️ Tool First</strong> Prefers building focused, composable tools over
+                monolithic frameworks.</div>
+            <div class="skill-card"><strong>📟 Backend Native</strong> Most at home designing APIs, data flows, and
+                server-side logic.</div>
+            <div class="skill-card"><strong>⚡ Efficiency</strong> Cares deeply about memory footprint, latency, and
+                resource efficiency.</div>
+            <div class="skill-card"><strong>🌐 Full Stack Capable</strong> Can go end-to-end when needed — shipping
+                dashboards, web UIs, and integrations.</div>
+        </div>
+
+        <!--
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin: 25px 0 12px;">
+            <div><span style="background:var(--fg); color:var(--bg); padding:3px 8px;">📜 Developer Logs</span> <span style="font-family: monospace;"> Click to fetch</span></div>
+            <button id="mysteryBtn" class="old-button">FETCH RANDOM LOG</button>
+        </div>
+        <div id="funFactBox" style="background: var(--fact-bg); border: 2px solid var(--card-border); padding: 14px 18px; margin-bottom: 28px; font-family: 'Georgia', serif; min-height: 85px; color: var(--fg);">
+            💠 Click the button to reveal a random log entry.
+        </div>
+        -->
+
+        <hr class="thin-hr">
+
+        <!-- Footer -->
+        <footer>
+            <!--
+            <span style="background: var(--fg); color: var(--bg); padding: 2px 8px; letter-spacing: 2px; font-weight: bold; font-family: monospace;">📟 VISITOR: [ 00,001 ]</span> &nbsp;&nbsp;|&nbsp;
+            -->
+            © 2026 schallten — Backend Developer &nbsp;|&nbsp;
+            <span id="liveDate"></span><br>
+            <blink>⚡ KEEPING IT MINIMAL ⚡</blink>
+        </footer>
+    </div>
+
+    <script>
+        // Dark mode toggle
+        const darkToggle = document.getElementById('darkToggle');
+        const html = document.documentElement;
+
+        const savedFunTheme = localStorage.getItem('fun-theme');
+        if (savedFunTheme === 'dark') {
+            html.setAttribute('data-theme', 'dark');
+            darkToggle.textContent = '[ LIGHT MODE ]';
+        }
+
+        darkToggle.addEventListener('click', () => {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('fun-theme', 'light');
+                darkToggle.textContent = '[ DARK MODE ]';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('fun-theme', 'dark');
+                darkToggle.textContent = '[ LIGHT MODE ]';
+            }
+        });
+
+        // GitHub API: last push date for schallten/schallten.github.io
+        const dateElem = document.getElementById('liveDate');
+        if (dateElem) {
+            fetch('https://api.github.com/repos/schallten/schallten.github.io')
+                .then(r => r.json())
+                .then(data => {
+                    const pushed = data.pushed_at;
+                    if (pushed) {
+                        const d = new Date(pushed);
+                        const formatted = d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                        dateElem.innerHTML = `🕰️ last updated: ${formatted}`;
+                    }
+                })
+                .catch(() => {
+                    dateElem.innerHTML = '🕰️ last updated: unknown';
+                });
+        }
+
+        // Project hover effects
+        const projects = document.querySelectorAll('.project-item');
+        projects.forEach(proj => {
+            proj.addEventListener('mouseenter', () => {
+                proj.style.background = 'var(--fact-hover)';
+                proj.style.boxShadow = '2px 2px 0px #888';
+            });
+            proj.addEventListener('mouseleave', () => {
+                proj.style.background = 'var(--card-bg)';
+                proj.style.boxShadow = '5px 5px 0px var(--shadow)';
+            });
+        });
+
+        console.log("%cSYSTEM INITIALIZED", "color: #0f0; background: #000; font-family: monospace; font-size:13px; padding:3px;");
+    </script>
+</body>
+
+</html>
