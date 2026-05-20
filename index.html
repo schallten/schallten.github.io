@@ -4,131 +4,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>schallten | developer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <script src="https://schallten.github.io/security.js"></script>
+  <meta name="description" content="schallten | Backend Developer specializing in server-side architecture, CLI tools, compilers, and isolated cloud environments.">
+  <title>schallten | backend developer</title>
+  
   <script src="security.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
+
+  <script src="https://schallten.github.io/security.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="noise">
-  <div class="top-banner">
-    <marquee behavior="scroll" direction="left" scrollamount="5">
-      <span class="banner-content">Rta &mdash; AI-assisted code editor with small memory footprint. Coming soon. <a
-          href="https://rta-three.vercel.app/">Explore Project</a></span>
-      <span class="banner-content">Rta &mdash; AI-assisted code editor with small memory footprint. Coming soon. <a
-          href="https://rta-three.vercel.app/">Explore Project</a></span>
-    </marquee>
-  </div>
+<body>
   <div class="container">
+    <!-- Header -->
     <header>
-      <div class="header-left">
-        <img src="https://avatars.githubusercontent.com/u/166111488?v=4" alt="abhinav" class="avatar pulse-glow">
-        <span class="name">schallten</span>
-      </div>
-      <div class="header-right">
-        <nav>
-          <a href="projects.html">projects</a>
-          <a href="fun.html" style="opacity: 0.6; font-size: 0.9em; margin-left: 10px;">fun.mode</a>
-        </nav>
-        <div class="controls">
-          <button class="icon-btn theme-toggle" aria-label="Toggle Theme">
-            <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="5" />
-              <line x1="12" y1="1" x2="12" y2="3" />
-              <line x1="12" y1="21" x2="12" y2="23" />
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-              <line x1="1" y1="12" x2="3" y2="12" />
-              <line x1="21" y1="12" x2="23" y2="12" />
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-            </svg>
-            <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-          </button>
-        </div>
+      <a href="index.html" class="logo-link" id="logo-link">schallten</a>
+      <div class="nav-links" id="nav-navigation">
+        <a href="index.html" class="active">home</a>
+        <a href="projects.html">projects</a>
+        <a href="blog/index.html">blog</a>
+        <a href="fun.html">fun.mode</a>
+        <button class="theme-btn" id="theme-toggle" aria-label="Toggle Theme">[ dark ]</button>
       </div>
     </header>
 
     <main>
-      <section class="intro">
-        <p>Hello! I am a backend developer with a focus on <span class="highlight-alt">server-side architecture</span>
-          and <span class="highlight-alt">CLI tooling</span>.</p>
-        <p>I build APIs, services, and low-level tools — occasionally going full stack when the project calls for it.
-          Currently working on <span class="highlight-alt">AI middleware</span> and exploring <span
-            class="highlight-alt">compiler internals</span>.</p>
-        <p>Open to new opportunities — reach me via <a href="https://www.linkedin.com/in/abhinav-592907335/"
-            class="link-inline-alt">LinkedIn</a>, <a href="https://github.com/schallten"
-            class="link-inline-alt">GitHub</a>, or my <a href="resume.pdf" class="link-inline-alt">Resume</a>.</p>
-      </section>
-
-      <section class="quick-links">
-        <a href="resume.pdf" class="nav-link-alt">Resume</a>
-        <a href="https://github.com/schallten" class="nav-link-alt">GitHub</a>
-        <a href="https://www.linkedin.com/in/abhinav-592907335/" class="nav-link-alt">LinkedIn</a>
-      </section>
-
-      <section id="featured-projects" class="featured-projects">
-        <h2 class="section-title">featured</h2>
-        <div class="project-grid">
-          <div class="project-card-alt">
-            <div class="img-container-alt">
-              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800"
-                alt="Microcontroller OS">
-            </div>
-            <h3 class="project-name">microcontroller os</h3>
-            <p class="project-desc">experimental c++ environment for esp8266 with littlefs and shell utilities.</p>
-          </div>
-          <div class="project-card-alt">
-            <div class="img-container-alt">
-              <img
-                src="https://media.licdn.com/dms/image/v2/D5622AQFx09cOs2YAyA/feedshare-shrink_480/B56ZtLhQ0dGwAY-/0/1766498570530?e=1776297600&v=beta&t=7Y7GcOL2lhvlA3kH0n_5PvbqtyfpyBUrZfzoZWnM_0Q"
-                alt="PMG">
-            </div>
-            <h3 class="project-name">pmg (poor man's git)</h3>
-            <p class="project-desc">custom version control system cli in go with a dedicated web dashboard for
-              repository tracking.</p>
-          </div>
-        </div>
-        <p class="more-link-text">you can check out all of them <a href="projects.html" class="nav-link-alt">here</a>
+      <!-- Hero -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <h1 id="hero-heading">I build full-stack applications with a strong focus on backend architecture.</h1>
+        <p>
+          I am a full-stack developer who prefers the server-side. I build interactive web applications and developer tools, ensuring that the backend logic is robust, clean, and highly performant.
+        </p>
+        <p>
+          I focus on building zero-dependency APIs, lightweight virtualization platforms, and custom developer tools. Open to interesting full-stack and backend engineering opportunities.
         </p>
       </section>
 
-      <section class="more-options">
-        <p><a href="projects.html" class="arrow-link-alt">view all work <span>&rarr;</span></a></p>
+      <!-- Contact Nodes -->
+      <section class="social-links" aria-label="Professional Nodes">
+        <a href="https://github.com/schallten" target="_blank" id="link-github">github</a>
+        <a href="https://www.linkedin.com/in/abhinav-592907335/" target="_blank" id="link-linkedin">linkedin</a>
+        <a href="resume.pdf" id="link-resume">resume</a>
+      </section>
+
+      <!-- Featured Projects -->
+      <section aria-labelledby="featured-heading">
+        <h2 class="section-label" id="featured-heading">featured projects</h2>
+        
+        <div class="project-list">
+          <!-- Container Provider -->
+          <div class="project-row">
+            <div class="project-info">
+              <a href="https://schallten.github.io/container-provider/" class="project-title" target="_blank" id="project-container-provider">Container Provider</a>
+              <span class="project-desc">Lightweight temporary cloud development environments on demand. Spawns isolated shell sandboxes in seconds.</span>
+            </div>
+            <div class="project-meta">Go / Docker / xterm.js</div>
+          </div>
+
+          <!-- Rta -->
+          <div class="project-row">
+            <div class="project-info">
+              <a href="https://rta-three.vercel.app/" class="project-title" target="_blank" id="project-rta">Rta</a>
+              <span class="project-desc">Low-memory AI-assisted terminal text editor built to run with multi-provider API aggregation.</span>
+            </div>
+            <div class="project-meta">JS / Python / Electron</div>
+          </div>
+
+          <!-- PMG -->
+          <div class="project-row">
+            <div class="project-info">
+              <a href="https://github.com/schallten/pmg" class="project-title" target="_blank" id="project-pmg">PMG (Poor Man's Git)</a>
+              <span class="project-desc">Custom Version Control System CLI built in Go with a dedicated web dashboard for indexing commits.</span>
+            </div>
+            <div class="project-meta">Go / React / FastAPI</div>
+          </div>
+
+          <!-- Microcontroller OS -->
+          <div class="project-row">
+            <div class="project-info">
+              <a href="https://github.com/schallten/system_operating" class="project-title" target="_blank" id="project-micro-os">Microcontroller OS</a>
+              <span class="project-desc">Experimental firmware shell environment for ESP8266 featuring LittleFS integration.</span>
+            </div>
+            <div class="project-meta">C++ / ESP8266 / LittleFS</div>
+          </div>
+        </div>
+
+        <a href="projects.html" class="more-link" id="link-all-projects">View all 7 project nodes &rarr;</a>
       </section>
     </main>
 
+    <!-- Footer -->
     <footer>
-      <div class="footer-left">
-        &copy; 2026 schallten
-      </div>
-      <div class="footer-right">
-        Backend Developer
-      </div>
+      <span>&copy; 2026 schallten</span>
+      <span>full-stack / backend developer</span>
     </footer>
   </div>
+
   <script>
-    const themeToggle = document.querySelector('.theme-toggle');
+    // Theme toggle
+    const themeBtn = document.getElementById('theme-toggle');
     const root = document.documentElement;
 
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') root.classList.add('light-mode');
-
-    if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        root.classList.toggle('light-mode');
-        const isLight = root.classList.contains('light-mode');
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      });
+    if (savedTheme === 'light') {
+      root.classList.add('light-mode');
+      themeBtn.innerText = '[ light ]';
     }
+
+    themeBtn.addEventListener('click', () => {
+      root.classList.toggle('light-mode');
+      const isLight = root.classList.contains('light-mode');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      themeBtn.innerText = isLight ? '[ light ]' : '[ dark ]';
+    });
   </script>
 </body>
 

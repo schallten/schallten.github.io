@@ -2,150 +2,192 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projects | abhinav</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://schallten.github.io/security.js"></script>
-    <script src="security.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Development nodes and projects created by schallten, including container orchestration, compilers, microcontroller firmware, and database tools.">
+  <title>projects | schallten</title>
+  <script src="security.js"></script>
+
+  <script src="https://schallten.github.io/security.js"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="noise">
-    <div class="container">
-        <header>
-            <div class="header-left">
-                <a href="index.html" class="back-link">
-                    <img src="https://avatars.githubusercontent.com/u/166111488?v=4" alt="Abhinav" class="avatar">
-                </a>
-                <span class="name">projects</span>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a href="index.html" class="logo-link" id="logo-link">schallten</a>
+      <div class="nav-links" id="nav-navigation">
+        <a href="index.html">home</a>
+        <a href="projects.html" class="active">projects</a>
+        <a href="blog/index.html">blog</a>
+        <a href="fun.html">fun.mode</a>
+        <button class="theme-btn" id="theme-toggle" aria-label="Toggle Theme">[ dark ]</button>
+      </div>
+    </header>
+
+    <main>
+      <section aria-labelledby="projects-heading">
+        <h2 class="section-label" id="projects-heading">all project nodes</h2>
+        
+        <div class="project-detail-list">
+          <!-- 1. Container Provider -->
+          <article class="project-detail-entry" id="detail-container-provider">
+            <div class="project-detail-header">
+              <h3 class="project-detail-title"><a href="https://schallten.github.io/container-provider/" target="_blank">Container Provider</a></h3>
+              <span class="project-stack">go / docker / xterm.js / cloudflared</span>
             </div>
-            <div class="header-right">
-                <nav>
-                    <a href="index.html">home</a>
-                </nav>
-                <div class="controls">
-                    <button class="icon-btn theme-toggle" aria-label="Toggle Theme">
-                        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5" />
-                            <line x1="12" y1="1" x2="12" y2="3" />
-                            <line x1="12" y1="21" x2="12" y2="23" />
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                            <line x1="1" y1="12" x2="3" y2="12" />
-                            <line x1="21" y1="12" x2="23" y2="12" />
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-                        </svg>
-                        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </button>
-                </div>
+            <p class="project-detail-desc">
+              On-demand temporary cloud development environments. Spin up a full Linux sandbox container in less than 3 seconds with CPU/RAM constraints. The environment has a dynamic public HTTPS endpoint exposed through an integrated Cloudflare tunnel for easy port sharing.
+            </p>
+            <ul class="project-features">
+              <li>Automatic cleanup: sandboxes auto-delete after 15 minutes of idle time or a 12-hour max lifetime.</li>
+              <li>Terminal Emulation: integration with xterm.js + FitAddon, supporting key bindings and window resize.</li>
+              <li>Secure Isolation: containers execute under a non-root dev user with dropped kernel privileges (--cap-drop=ALL) and process limits.</li>
+            </ul>
+            <div class="project-detail-links">
+              <a href="https://schallten.github.io/container-provider/" target="_blank">launch app</a>
+              <a href="https://github.com/schallten/container-provider" target="_blank">github repo</a>
             </div>
-        </header>
+          </article>
 
-        <main>
-            <section class="project-all">
-                <h2 class="section-title">all projects</h2>
-                <div class="project-list-full">
-
-                    <div class="project-entry">
-                        <h3 class="entry-title"><a href="https://rta-three.vercel.app/" target="_blank" class="nav-link-alt">rta</a></h3>
-                        <span class="entry-stack">javascript</span>
-                        <p class="entry-desc">AI assisted code editor - coming soon.</p>
-                    </div>
-
-
-                    <div class="project-entry">
-                        <h3 class="entry-title"><a href="https://github.com/schallten/system_operating" target="_blank"
-                                class="nav-link-alt">microcontroller os</a></h3>
-                        <span class="entry-stack">C++, ESP8266, LittleFS</span>
-                        <p class="entry-desc">Experimental C++ environment for ESP8266 featuring a custom LittleFS
-                            implementation and shell utilities for hardware interaction.</p>
-                    </div>
-
-                    <div class="project-entry">
-                        <h3 class="entry-title"><a href="https://github.com/schallten/elin" target="_blank"
-                                class="nav-link-alt">elin language</a></h3>
-                        <span class="entry-stack">Python, C++, Virtual Machine</span>
-                        <p class="entry-desc">A stack-based toy language featuring a Python-driven compiler and a
-                            high-performance C++ Virtual Machine for execution.</p>
-                    </div>
-
-                    <div class="project-entry">
-                        <h3 class="entry-title"><a href="https://github.com/schallten/pmg" target="_blank"
-                                class="nav-link-alt">pmg (poor man's git)</a></h3>
-                        <span class="entry-stack">Go, FastAPI, React</span>
-                        <p class="entry-desc">Custom Version Control System CLI built in Go, accompanied by a dedicated
-                            web dashboard for repository visualization.</p>
-                    </div>
-
-                    <div class="project-entry">
-                        <h3 class="entry-title"><a href="https://github.com/schallten/VN-Core" target="_blank"
-                                class="nav-link-alt">vn-core</a></h3>
-                        <span class="entry-stack">DSL, Pygame, Python</span>
-                        <p class="entry-desc">A robust Visual Novel engine utilizing a custom Domain Specific Language
-                            and a Pygame-based renderer for high-performance storytelling.</p>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <div class="footer-left">
-                &copy; 2026 Abhinav
+          <!-- 2. Elin Language -->
+          <article class="project-detail-entry" id="detail-elin">
+            <div class="project-detail-header">
+              <h3 class="project-detail-title"><a href="https://github.com/schallten/elin" target="_blank">Elin Programming Language</a></h3>
+              <span class="project-stack">python / c++ / virtual machine</span>
             </div>
-            <div class="footer-right">
-                Systems Developer
+            <p class="project-detail-desc">
+              A custom stack-based language implementation. Combines a Python-based parser/compiler translating code to bytes, with a lightweight, high-performance C++ Virtual Machine for command execution.
+            </p>
+            <ul class="project-features">
+              <li>Custom ISA bytecode compiler including basic loops, math, and variable routines.</li>
+              <li>Stack VM engine in C++ with direct register emulation and fast execution.</li>
+            </ul>
+            <div class="project-detail-links">
+              <a href="https://github.com/schallten/elin" target="_blank">github repo</a>
             </div>
-        </footer>
-    </div>
+          </article>
 
-    <script>
-        const themeToggle = document.querySelector('.theme-toggle');
-        const root = document.documentElement;
+          <!-- 3. Microcontroller OS -->
+          <article class="project-detail-entry" id="detail-micro-os">
+            <div class="project-detail-header">
+              <h3 class="project-detail-title"><a href="https://github.com/schallten/system_operating" target="_blank">Microcontroller OS</a></h3>
+              <span class="project-stack">c++ / esp8266 / littlefs</span>
+            </div>
+            <p class="project-detail-desc">
+              Experimental firmware shell utility for NodeMCU boards. Builds a custom interactive shell environment directly over physical serial connections.
+            </p>
+            <ul class="project-features">
+              <li>Custom implementation of the LittleFS filesystem for flash memory indexing.</li>
+              <li>Serial shell commands allowing file transfers, directories manipulation, and direct hardware pin state controls.</li>
+            </ul>
+            <div class="project-detail-links">
+              <a href="https://github.com/schallten/system_operating" target="_blank">github repo</a>
+            </div>
+          </article>
 
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') root.classList.add('light-mode');
+          <!-- 4. PMG -->
+          <article class="project-detail-entry" id="detail-pmg">
+            <div class="project-detail-header">
+              <h3 class="project-detail-title"><a href="https://github.com/schallten/pmg" target="_blank">PMG (Poor Man's Git)</a></h3>
+              <span class="project-stack">go / fastapi / react</span>
+            </div>
+            <p class="project-detail-desc">
+              Custom version control CLI utility built in Go to track and version repository directories. Complemented by a React web panel displaying commit logs and branch indexes.
+            </p>
+            <ul class="project-features">
+              <li>Sha256 index mapping to track file changes and folder snapshots.</li>
+              <li>Local web interface displaying branch networks and tree-based commit visualizations.</li>
+            </ul>
+            <div class="project-detail-links">
+              <a href="https://github.com/schallten/pmg" target="_blank">github repo</a>
+            </div>
+          </article>
 
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                root.classList.toggle('light-mode');
-                const isLight = root.classList.contains('light-mode');
-                localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            });
-        }
+          <!-- 5. ER Maker (dbms.html) -->
+          <article class="project-detail-entry" id="detail-er-maker">
+            <div class="project-detail-header">
+              <h3 class="project-detail-title"><a href="dbms.html">ER Maker (AI ER Diagram Generator)</a></h3>
+              <span class="project-stack">preact / mermaid.js / gemini api / svg-pan-zoom</span>
+            </div>
+            <p class="project-detail-desc">
+              Interactive schema planning utility. Takes natural language database descriptions or table parameters and structures them into a visual, zoomable, and interactive Entity-Relationship diagram.
+            </p>
+            <ul class="project-features">
+              <li>Text-to-schema compiler translating conversational requirements into structural JSON representations.</li>
+              <li>Visual controls: SVG export options alongside integrated canvas pan and zoom tools.</li>
+              <li>Exam helper module: generates summaries detailing cardinality, keys, and relational logic.</li>
+            </ul>
+            <div class="project-detail-links">
+              <a href="dbms.html">launch tools</a>
+            </div>
+          </article>
 
-        // Anti-cloning check
-        const allowedHosts = ['127.0.0.1:5501', 'schallten.github.io'];
-        if (!allowedHosts.includes(window.location.host)) {
-            const facts = [
-                "Sunflowers can help detoxify soil tainted with radiation.",
-                "Tulips were once more valuable than gold in the Netherlands.",
-                "Roses are related to apples, raspberries, and cherries.",
-                "Orchids can grow without soil; they get nutrients from the air.",
-                "A single flower of the corpse flower can grow up to 10 feet tall."
-            ];
-            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+          <!-- 6. Rta -->
+          <article class="project-detail-entry" id="detail-rta">
+            <div class="project-detail-header">
+              <h3 class="project-detail-title"><a href="https://rta-three.vercel.app/" target="_blank">Rta Code Editor</a></h3>
+              <span class="project-stack">javascript / python / electron / fastapi</span>
+            </div>
+            <p class="project-detail-desc">
+              AI-assisted code editor client. Uses an optimized local Python middleware server to proxy multiple provider APIs and compile contextual data, leaving the Electron client wrapper extremely lightweight and fast.
+            </p>
+            <ul class="project-features">
+              <li>Low-overhead client window consuming less than 45MB of memory on startup.</li>
+              <li>Multi-provider aggregation allowing seamless switches between commercial and local model APIs.</li>
+            </ul>
+            <div class="project-detail-links">
+              <a href="https://rta-three.vercel.app/" target="_blank">explore mockup</a>
+            </div>
+          </article>
 
-            document.body.innerHTML = `
-                <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;font-family:sans-serif;text-align:center;padding:20px;">
-                    <img src="floral.jpg" style="max-width:80%;max-height:60%;border-radius:10px;margin-bottom:20px;border:2px solid #555;">
-                    <h1 style="color:#ffb7ce;margin-bottom:10px;">🌸 Important Flower Fact 🌸</h1>
-                    <p style="font-size:20px;max-width:600px;line-height:1.5;">${randomFact}</p>
-                    <p style="margin-top:40px;color:#555;font-size:12px;">This domain is unauthorized. Please visit schallten.github.io</p>
-                </div>
-            `;
-        }
-    </script>
+          <!-- 7. VN-Core -->
+          <article class="project-detail-entry" id="detail-vn-core">
+            <div class="project-detail-header">
+              <h3 class="project-detail-title"><a href="https://github.com/schallten/VN-Core" target="_blank">VN-Core Visual Novel Engine</a></h3>
+              <span class="project-stack">python / pygame / story dsl</span>
+            </div>
+            <p class="project-detail-desc">
+              Storyboard rendering engine for interactive storytelling. Uses a custom script parser translating text script instructions into coordinates, audio triggers, and graphic overlays.
+            </p>
+            <ul class="project-features">
+              <li>Script compiler converting visual novel coordinates and dialogues into Pygame scene trees.</li>
+              <li>Automated scene index states, sound caches, saving points, and dialog logs.</li>
+            </ul>
+            <div class="project-detail-links">
+              <a href="https://github.com/schallten/VN-Core" target="_blank">github repo</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <span>&copy; 2026 schallten</span>
+      <span>full-stack / backend developer</span>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      root.classList.add('light-mode');
+      themeBtn.innerText = '[ light ]';
+    }
+
+    themeBtn.addEventListener('click', () => {
+      root.classList.toggle('light-mode');
+      const isLight = root.classList.contains('light-mode');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      themeBtn.innerText = isLight ? '[ light ]' : '[ dark ]';
+    });
+  </script>
 </body>
 
 </html>

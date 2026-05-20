@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A deep dive into why and how I built TempDev (Container Provider), a lightweight, zero-dependency disposable cloud sandbox engine.">
+  <title>Building TempDev | schallten</title>
+  
+  <script src="../security.js"></script>
+    <!-- <script src="security.js"></script> -->
+
+  <script src="https://schallten.github.io/security.js"></script>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .post-meta-details {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+    .post-content h2 {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      margin: 48px 0 20px 0;
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+    .post-content p {
+      margin-bottom: 24px;
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .post-content ul {
+      margin: 0 0 24px 20px;
+      color: var(--text-secondary);
+      list-style-type: square;
+    }
+    .post-content li {
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    .post-content pre {
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      padding: 16px;
+      margin: 32px 0;
+      overflow-x: auto;
+      border-radius: 4px;
+    }
+    html.light-mode .post-content pre {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+    .post-content code {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent-color);
+    }
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 40px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .back-btn:hover {
+      color: var(--text-primary);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a href="../index.html" class="logo-link" id="logo-link">schallten</a>
+      <div class="nav-links" id="nav-navigation">
+        <a href="../index.html">home</a>
+        <a href="../projects.html">projects</a>
+        <a href="index.html" class="active">blog</a>
+        <a href="../fun.html">fun.mode</a>
+        <button class="theme-btn" id="theme-toggle" aria-label="Toggle Theme">[ dark ]</button>
+      </div>
+    </header>
+
+    <main>
+      <a href="index.html" class="back-btn">&larr; back to writing</a>
+
+      <article class="post-content">
+        <h1 style="font-family: var(--font-heading); font-size: 40px; line-height: 1.2; font-weight: 400; margin-bottom: 12px;">Building TempDev: Zero-Dependency Disposable Cloud Environments</h1>
+        <div class="post-meta-details">2026.05.20 &bull; 6 min read &bull; by schallten</div>
+
+        <p>
+          I recently wrapped up a core side project: <strong>TempDev</strong> (also known as <em>Container Provider</em>). It is a web application that spins up fully functional, isolated Linux development environments in your browser in under 3 seconds. There is no signup, no persistent database, no credentials overhead, and zero user friction.
+        </p>
+        
+        <h2>Why I Built It</h2>
+        <p>
+          The genesis of TempDev lies in another project of mine, <a href="https://rta-three.vercel.app/" target="_blank">Rta</a>, an AI-assisted code editor client. Rta is designed to analyze and run generated script loops. To run agent-generated code safely, I needed a way to isolate running scripts without compromising the host machine.
+        </p>
+        <p>
+          I looked into existing cloud sandbox solutions. The available options were either too heavy, resource-hungry, locked behind API paywalls, or required complex account registration. For a developer side project, spending massive monthly fees on a Kubernetes setup or cluster VMs was not viable. I wanted a container provider that was minimal, fast, and could run efficiently on a single cheap host instance.
+        </p>
+
+        <h2>Under the Hood: The Architecture</h2>
+        <p>
+          To keep the system extremely fast, I built it with Go. The backend runs on a single AWS Free Tier <code>t3.micro</code> instance. It orchestrates local Docker containers dynamically, communicating via raw unix sockets rather than external orchestrators.
+        </p>
+        
+        <p>Key engineering pillars include:</p>
+        <ul>
+          <li>
+            <strong>PTY Multiplexing & WebSockets:</strong> Instead of executing commands inside a mock sandbox console, TempDev leverages a real pseudo-terminal (PTY) in the container. The backend proxies terminal output to the client's browser (rendered via xterm.js) using WebSockets, syncing window resize metrics seamlessly.
+          </li>
+          <li>
+            <strong>Dynamic Cloudflare Tunnel Provisioning:</strong> Exposing ports inside isolated sandboxes to the open web is notoriously hard. TempDev wraps <code>cloudflared</code>. When a user runs a server inside their browser terminal (e.g., on port 8080), TempDev spawns a routing process dynamically to provide an HTTPS URL accessible worldwide in seconds.
+          </li>
+          <li>
+            <strong>In-Memory Lifecycle Scheduler:</strong> Rather than setting up a Postgres or Redis database to manage container logs and user sessions, all container data is tracked in-memory using Go's concurrent-safe maps and channels. If a container goes idle, it self-destructs.
+          </li>
+        </ul>
+
+        <h2>Resource Constraints & Hardened Security</h2>
+        <p>
+          Running a service that allows arbitrary code execution on a free-tier server is a massive security challenge. To avoid resource exhaustion and server abuse, the sandbox utilizes aggressive kernel-level mitigation:
+        </p>
+        
+        <pre><code>// Dynamic Docker Host Launch Command Arguments
+docker run -d \
+  --memory="512m" \
+  --cpus="0.5" \
+  --cap-drop=ALL \
+  --user 1000:1000 \
+  --net=bridge \
+  --read-only \
+  --tmpfs /tmp:rw,noexec,nosuid \
+  tempdev-sandbox-base</code></pre>
+
+        <p>
+          By dropping all Linux capabilities (<code>--cap-drop=ALL</code>) and forcing the shell to execute as a non-root <code>dev</code> user, it prevents host system privilege escalation. The sandbox is bounded by a 512MB RAM limit and 0.5 CPU cores, protecting the host instance from noisy-neighbor starvation.
+        </p>
+        <p>
+          Additionally, an automated sweeper goroutine periodically reads container logs and metrics, terminating any sandbox that runs cryptominers or high-velocity outbound port scanning.
+        </p>
+
+        <h2>Conclusion</h2>
+        <p>
+          TempDev solves a personal developer pain point. It proves that you don't need a heavy infrastructure stack or heavy enterprise budgets to build responsive, isolated developer tools.
+        </p>
+        <p>
+          The next step is integrating this engine directly into Rta so that AI agents can write and run code inside a safe, transient sandbox environment seamlessly.
+        </p>
+        <p>
+          You can inspect the full implementation on GitHub: <a href="https://github.com/schallten/container-provider" target="_blank">github.com/schallten/container-provider</a>.
+        </p>
+      </article>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <span>&copy; 2026 schallten</span>
+      <span>full-stack / backend developer</span>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      root.classList.add('light-mode');
+      themeBtn.innerText = '[ light ]';
+    }
+
+    themeBtn.addEventListener('click', () => {
+      root.classList.toggle('light-mode');
+      const isLight = root.classList.contains('light-mode');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      themeBtn.innerText = isLight ? '[ light ]' : '[ dark ]';
+    });
+  </script>
+</body>
+
+</html>

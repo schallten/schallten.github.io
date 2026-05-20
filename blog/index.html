@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Technical thoughts and essays on systems design, backend orchestration, and developer tooling by schallten.">
+  <title>blog | schallten</title>
+  
+  <script src="../security.js"></script>
+
+  <script src="https://schallten.github.io/security.js"></script>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a href="../index.html" class="logo-link" id="logo-link">schallten</a>
+      <div class="nav-links" id="nav-navigation">
+        <a href="../index.html">home</a>
+        <a href="../projects.html">projects</a>
+        <a href="index.html" class="active">blog</a>
+        <a href="../fun.html">fun.mode</a>
+        <button class="theme-btn" id="theme-toggle" aria-label="Toggle Theme">[ dark ]</button>
+      </div>
+    </header>
+
+    <main>
+      <section aria-labelledby="blog-heading">
+        <h2 class="section-label" id="blog-heading">technical writing</h2>
+        
+        <div class="project-list">
+          <!-- Post 1 -->
+          <div class="project-row" style="align-items: flex-start; padding: 24px 0;">
+            <div class="project-info" style="max-width: 550px;">
+              <a href="why-tempdev.html" class="project-title" style="font-size: 24px;" id="post-link-why-tempdev">Building TempDev: Zero-Dependency Disposable Cloud Environments</a>
+              <span class="project-desc" style="margin-top: 8px;">
+                Why I built a lightweight, self-destructing sandbox provider to run on an AWS free-tier instance for the Rta code editor.
+              </span>
+            </div>
+            <div class="project-meta" style="font-size: 13px;">2026.05.20</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <span>&copy; 2026 schallten</span>
+      <span>full-stack / backend developer</span>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      root.classList.add('light-mode');
+      themeBtn.innerText = '[ light ]';
+    }
+
+    themeBtn.addEventListener('click', () => {
+      root.classList.toggle('light-mode');
+      const isLight = root.classList.contains('light-mode');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      themeBtn.innerText = isLight ? '[ light ]' : '[ dark ]';
+    });
+  </script>
+</body>
+
+</html>

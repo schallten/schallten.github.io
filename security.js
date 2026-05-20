@@ -2,7 +2,7 @@
 // This script ensures the site is running on authorized domains.
 
 (function () {
-    const allowedHosts = ['127.0.0.1:5501', 'schallten.github.io'];
+    const allowedHosts = ['127.0.0.1:5500', 'schallten.github.io'];
 
     if (!allowedHosts.includes(window.location.host)) {
         const facts = [
