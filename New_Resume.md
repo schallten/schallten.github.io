@@ -5,7 +5,7 @@ header:
   - text: <span class="iconify" data-icon="tabler:mail"></span> 1899abhinav@gmail.com
     link: mailto:1899abhinav@gmail.com
   - text: <span class="iconify" data-icon="tabler:brand-github"></span> schallten
-    link: https://github.com/Renovamen
+    link: https://github.com/schallten
   - text: <span class="iconify" data-icon="charm:person"></span> website
     link: https://schallten.github.io
 ---
