@@ -92,7 +92,7 @@
         <div class="post-meta-details">2026.05.20 &bull; 6 min read &bull; by schallten</div>
 
         <p>
-          I recently wrapped up a core side project: <strong>TempDev</strong> (also known as <em>Container Provider</em>). It is a web application that spins up fully functional, isolated Linux development environments in your browser in under 3 seconds. There is no signup, no persistent database, no credentials overhead, and zero user friction.
+          I recently wrapped up a core side project: <strong>TempDev</strong> (also known as <em>Container Provider</em>). It is a web application that spins up fully functional, isolated Linux development environments in your browser in under 500ms. There is no signup, no credentials overhead, and zero user friction.
         </p>
         
         <h2>Why I Built It</h2>
@@ -117,7 +117,7 @@
             <strong>Dynamic Cloudflare Tunnel Provisioning:</strong> Exposing ports inside isolated sandboxes to the open web is notoriously hard. TempDev wraps <code>cloudflared</code>. When a user runs a server inside their browser terminal (e.g., on port 8080), TempDev spawns a routing process dynamically to provide an HTTPS URL accessible worldwide in seconds.
           </li>
           <li>
-            <strong>In-Memory Lifecycle Scheduler:</strong> Rather than setting up a Postgres or Redis database to manage container logs and user sessions, all container data is tracked in-memory using Go's concurrent-safe maps and channels. If a container goes idle, it self-destructs.
+            <strong>SQLite-backed Lifecycle Scheduler:</strong> Container state, billing, and event logs are persisted in SQLite with WAL mode for concurrent access. An in-memory sync.Map serves as a hot cache for active environments, while a background goroutine enforces idle timeouts (15min), max lifetime (12h), and orphan cleanup on server restart.
           </li>
         </ul>
 
@@ -130,19 +130,29 @@
 docker run -d \
   --memory="512m" \
   --cpus="0.5" \
-  --cap-drop=ALL \
-  --user 1000:1000 \
-  --net=bridge \
-  --read-only \
-  --tmpfs /tmp:rw,noexec,nosuid \
-  tempdev-sandbox-base</code></pre>
+  --pids-limit=64 \
+  --cap-add=NET_ADMIN \
+  --security-opt=no-new-privileges \
+  --add-host=aws-metadata:169.254.169.254 \
+  tempdev:latest</code></pre>
 
         <p>
-          By dropping all Linux capabilities (<code>--cap-drop=ALL</code>) and forcing the shell to execute as a non-root <code>dev</code> user, it prevents host system privilege escalation. The sandbox is bounded by a 512MB RAM limit and 0.5 CPU cores, protecting the host instance from noisy-neighbor starvation.
+          The <code>--security-opt=no-new-privileges</code> flag prevents privilege escalation via setuid/setgid binaries. All interactive sessions (WebSocket shell and SSH) run as a non-root <code>dev</code> user (UID 1000) via <code>docker exec -u dev</code>. <code>--cap-add=NET_ADMIN</code> is granted solely to allow iptables rules in the entrypoint that block access to the AWS metadata endpoint (<code>169.254.169.254</code>), preventing SSRF-based credential theft. The sandbox is bounded by a 512MB RAM limit, 0.5 CPU cores, and a 64-PID cap, protecting the host instance from fork bombs and noisy-neighbor starvation.
         </p>
         <p>
           Additionally, an automated sweeper goroutine periodically reads container logs and metrics, terminating any sandbox that runs cryptominers or high-velocity outbound port scanning.
         </p>
+
+        <h2>Benchmark Results</h2>
+        <p>
+          The project includes a reproducible Go benchmark suite (<code>go test -bench=.</code>). Measured on an AMD Ryzen 7 8840HS with a cached Docker image:
+        </p>
+        <ul>
+          <li>Single container cold start: <strong>~270ms</strong></li>
+          <li>20 concurrent containers: <strong>~1.6s total</strong> (~80ms each when parallelized)</li>
+          <li>Container cleanup: <strong>~170ms</strong></li>
+          <li>sshd startup: <strong>~90ms</strong></li>
+        </ul>
 
         <h2>Conclusion</h2>
         <p>
