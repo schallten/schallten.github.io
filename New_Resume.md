@@ -23,26 +23,43 @@ header:
 BTech in Computer Science and System Engineering
   ~ 08/2024 - 06/2028
 
+
 ## Projects
+
+**Elin Programming Language**
+  ~ Python, C++, Virtual Machine
+  ~ 01/2026 - Present
+
+- Designed a complete compiler toolchain (3,190 LOC) with lexer, recursive-descent parser, static type system with inference, and code generator with constant folding and peephole optimization
+- Built a stack-based virtual machine in C++ (1,258 LOC) executing 43+ opcodes with call stack frames and a multi-segment bump allocator with handle-based indirection
+- Implemented region-based memory management for automatic cleanup without garbage collection, plus runtime detection of use-after-free and out-of-bounds access
+
+**[Rta Code Editor](https://rta-three.vercel.app)**
+  ~ Python, Go, C/Lua, JavaScript, React Native
+  ~ 04/2026 - Present
+
+
+- Developed a 22-tool AI coding agent with custom semantic search engine, LSP integration for real-time diagnostics, and AST-aware code refactoring
+- Built a multi-provider AI proxy with automatic failover across 6 providers, streaming responses, and tier-based rate limiting with per-user locks preventing race conditions
+- Pioneered context compaction enabling unlimited session length beyond context window limits with tree-structured session persistence
+- Shipped cross-platform ecosystem: CLI agent, desktop IDE (C/Lua), mobile app (React Native), and web dashboard (Preact)
 
 **Container Provider (TempDev)**
   ~ Go, Docker, WebSockets, Cloudflared
   ~ 04/2026 - 05/2026
 
-- Built a cloud sandbox engine spinning up fully isolated Linux environments in the browser in under 3 seconds
-- Engineered dynamic Cloudflare tunnel provisioning to instantly expose internal container ports to public HTTPS URLs
-- Designed a database-free, in-memory scheduler using Go channels, running efficiently on AWS Free Tier
-- Hardened security by dropping kernel capabilities (`--cap-drop=ALL`) and building an automated abuse sweeper
+- Engineered a multi-tenant container platform in Go provisioning isolated Linux environments in ~400ms via WebSocket-based terminal sessions with dynamic resize
+- Integrated Cloudflare tunnel provisioning inside containers using HTTP2 protocol with real-time URL streaming to connected clients
+- Architected a lock-free concurrent scheduler achieving 20 simultaneous containers in ~1.6s with background goroutine-based cleanup and billing
+- Implemented defense-in-depth security: cgroup resource limits, no-new-privileges, non-root sessions, and iptables-based AWS metadata endpoint blocking
 
+**Microcontroller OS**
+  ~ C++, ESP8266, LittleFS
+  ~ 09/2025 - Present
 
-**Rta Code Editor**
-  ~ JavaScript, Python, FastAPI, Electron
-  ~ 04/2026 - Present
-
-- Architected an AI-assisted terminal agent maintaining an ultra-lightweight memory footprint (under 20MB)
-- Engineered a local Python middleware proxy to seamlessly aggregate commercial and local LLM APIs
-- Designed context-compilation strategies to efficiently feed large code snippets into AI engines
-
+- Engineered a complete embedded OS runtime on ESP8266 (80KB RAM) with interactive shell, 12 UNIX-like filesystem commands, and first-boot auto-provisioning
+- Designed a custom declarative configuration system with full parser, in-memory storage, and persistent write-back — inspired by NixOS's `configuration.nix`
+- Implemented a dual-output abstraction layer routing all output to Serial or OLED display with paginated text viewer and console-like scrolling
 
 **PMG (Poor Man's Git)**
   ~ Go, FastAPI, React
@@ -51,24 +68,6 @@ BTech in Computer Science and System Engineering
 - Built a custom Version Control System CLI from scratch in Go to track and version local repository directories
 - Developed an indexing engine utilizing SHA256 mapping to track delta changes, similar to Git's object database
 - Created a React web dashboard connected via FastAPI to visually map commit histories and branch topologies
-
-
-**Elin Programming Language**
-  ~ Python, C++, Virtual Machine
-  ~ 01/2026 - Present
-
-- Constructed a Python parser and compiler to translate source code into a custom stack-based bytecode
-- Engineered a fast, low-overhead C++ Virtual Machine to natively execute the custom Instruction Set Architecture
-- Implemented arithmetic operations, loops, and stack routines, showcasing core compiler design principles
-
-
-**Microcontroller OS**
-  ~ C++, ESP8266, LittleFS
-  ~ 09/2025 - Present
-
-- Designed an experimental firmware shell for NodeMCU boards operating directly over physical serial connections
-- Integrated a custom wrapper for LittleFS, achieving high-performance flash memory indexing and wear-leveling
-- Exposed serial CLI commands for file system manipulation, real-time data transfers, and hardware pin controls
 
 
 ## Skills
