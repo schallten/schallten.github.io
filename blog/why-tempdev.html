@@ -4,92 +4,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A deep dive into why and how I built TempDev (Container Provider), a lightweight, zero-dependency disposable cloud sandbox engine.">
+  <meta name="description" content="A deep dive into why and how I built TempDev (Container Provider).">
   <title>Building TempDev | schallten</title>
   
   <script src="../security.js"></script>
-    <!-- <script src="security.js"></script> -->
-
   <script src="https://schallten.github.io/security.js"></script>
   <link rel="stylesheet" href="../styles.css">
   <style>
-    .post-meta-details {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 40px;
-    }
     .post-content h2 {
-      font-family: var(--font-heading);
-      font-size: 26px;
-      margin: 48px 0 20px 0;
-      color: var(--text-primary);
+      font-size: 20px;
+      margin: 48px 0 16px 0;
       font-weight: 400;
     }
     .post-content p {
       margin-bottom: 24px;
-      color: var(--text-secondary);
-      font-size: 15px;
+      color: #999;
+      font-size: 14px;
       line-height: 1.7;
     }
     .post-content ul {
       margin: 0 0 24px 20px;
-      color: var(--text-secondary);
       list-style-type: square;
     }
     .post-content li {
       margin-bottom: 12px;
-      font-size: 14px;
+      font-size: 13px;
+      color: #999;
     }
     .post-content pre {
-      background-color: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-color);
+      background: #f5f5f5;
       padding: 16px;
       margin: 32px 0;
       overflow-x: auto;
       border-radius: 4px;
     }
-    html.light-mode .post-content pre {
-      background-color: rgba(0, 0, 0, 0.02);
-    }
     .post-content code {
-      font-family: var(--font-mono);
+      font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
-      color: var(--accent-color);
-    }
-    .back-btn {
-      display: inline-block;
-      margin-bottom: 40px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 13px;
-    }
-    .back-btn:hover {
-      color: var(--text-primary);
-      text-decoration: underline;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <!-- Header -->
-    <header>
-      <a href="../index.html" class="logo-link" id="logo-link">schallten</a>
-      <div class="nav-links" id="nav-navigation">
+    <!-- Nav -->
+    <header style="text-align:center;">
+      <div class="nav-links">
         <a href="../index.html">home</a>
-        <a href="../projects.html">projects</a>
-        <a href="index.html" class="active">blog</a>
         <a href="../fun.html">fun.mode</a>
-        <button class="theme-btn" id="theme-toggle" aria-label="Toggle Theme">[ dark ]</button>
       </div>
     </header>
 
     <main>
-      <a href="index.html" class="back-btn">&larr; back to writing</a>
+      <a href="../index.html" style="font-size:13px;color:#999;display:inline-block;margin-bottom:40px;">&larr; back</a>
 
       <article class="post-content">
-        <h1 style="font-family: var(--font-heading); font-size: 40px; line-height: 1.2; font-weight: 400; margin-bottom: 12px;">Building TempDev: Zero-Dependency Disposable Cloud Environments</h1>
-        <div class="post-meta-details">2026.05.20 &bull; 6 min read &bull; by schallten</div>
+        <h1 style="font-size:24px;font-weight:400;margin-bottom:8px;">Building TempDev: Zero-Dependency Disposable Cloud Environments</h1>
+        <div style="font-size:12px;color:#999;margin-bottom:40px;">2026.05.20</div>
 
         <p>
           I recently wrapped up a core side project: <strong>TempDev</strong> (also known as <em>Container Provider</em>). It is a web application that spins up fully functional, isolated Linux development environments in your browser in under 500ms. There is no signup, no credentials overhead, and zero user friction.
@@ -126,8 +97,7 @@
           Running a service that allows arbitrary code execution on a free-tier server is a massive security challenge. To avoid resource exhaustion and server abuse, the sandbox utilizes aggressive kernel-level mitigation:
         </p>
         
-        <pre><code>// Dynamic Docker Host Launch Command Arguments
-docker run -d \
+        <pre><code>docker run -d \
   --memory="512m" \
   --cpus="0.5" \
   --pids-limit=64 \
@@ -137,10 +107,7 @@ docker run -d \
   tempdev:latest</code></pre>
 
         <p>
-          The <code>--security-opt=no-new-privileges</code> flag prevents privilege escalation via setuid/setgid binaries. All interactive sessions (WebSocket shell and SSH) run as a non-root <code>dev</code> user (UID 1000) via <code>docker exec -u dev</code>. <code>--cap-add=NET_ADMIN</code> is granted solely to allow iptables rules in the entrypoint that block access to the AWS metadata endpoint (<code>169.254.169.254</code>), preventing SSRF-based credential theft. The sandbox is bounded by a 512MB RAM limit, 0.5 CPU cores, and a 64-PID cap, protecting the host instance from fork bombs and noisy-neighbor starvation.
-        </p>
-        <p>
-          Additionally, an automated sweeper goroutine periodically reads container logs and metrics, terminating any sandbox that runs cryptominers or high-velocity outbound port scanning.
+          The <code>--security-opt=no-new-privileges</code> flag prevents privilege escalation via setuid/setgid binaries. All interactive sessions (WebSocket shell and SSH) run as a non-root <code>dev</code> user (UID 1000) via <code>docker exec -u dev</code>. <code>--cap-add=NET_ADMIN</code> is granted solely to allow iptables rules in the entrypoint that block access to the AWS metadata endpoint (<code>169.254.169.254</code>), preventing SSRF-based credential theft.
         </p>
 
         <h2>Benchmark Results</h2>
@@ -156,13 +123,7 @@ docker run -d \
 
         <h2>Conclusion</h2>
         <p>
-          TempDev solves a personal developer pain point. It proves that you don't need a heavy infrastructure stack or heavy enterprise budgets to build responsive, isolated developer tools.
-        </p>
-        <p>
-          The next step is integrating this engine directly into Rta so that AI agents can write and run code inside a safe, transient sandbox environment seamlessly.
-        </p>
-        <p>
-          You can inspect the full implementation on GitHub: <a href="https://github.com/schallten/container-provider" target="_blank">github.com/schallten/container-provider</a>.
+          TempDev solves a personal developer pain point. It proves that you don't need a heavy infrastructure stack or heavy enterprise budgets to build responsive, isolated developer tools. You can inspect the full implementation on GitHub: <a href="https://github.com/schallten/container-provider" target="_blank">github.com/schallten/container-provider</a>.
         </p>
       </article>
     </main>
@@ -173,25 +134,6 @@ docker run -d \
       <span>full-stack / backend developer</span>
     </footer>
   </div>
-
-  <script>
-    // Theme toggle
-    const themeBtn = document.getElementById('theme-toggle');
-    const root = document.documentElement;
-
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      root.classList.add('light-mode');
-      themeBtn.innerText = '[ light ]';
-    }
-
-    themeBtn.addEventListener('click', () => {
-      root.classList.toggle('light-mode');
-      const isLight = root.classList.contains('light-mode');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      themeBtn.innerText = isLight ? '[ light ]' : '[ dark ]';
-    });
-  </script>
 </body>
 
 </html>

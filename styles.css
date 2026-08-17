@@ -1,37 +1,10 @@
 /*
   =========================================
-  SCHALLTEN - EDITORIAL BRUTALIST STYLE
+  SCHALLTEN - MINIMAL LIGHT
   =========================================
-  Typography:
-  - Headings: "DM Serif Display", serif
-  - Body & UI: "JetBrains Mono", monospace
-  
-  Color Palette:
-  - Dark (Default): Obsidian (#09090b), Chalk (#f4f4f5), Slate (#52525b), Orange Accent (#ff4f00)
-  - Light: Alabaster (#fafaf9), Ink (#18181b), Slate (#71717a), Blue Accent (#0049db)
 */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
-
-:root {
-  --bg-color: #09090b;
-  --text-primary: #f4f4f5;
-  --text-secondary: #a1a1aa;
-  --text-muted: #52525b;
-  --border-color: #27272a;
-  --accent-color: #ff4f00; /* Signal Orange */
-  --font-heading: 'DM Serif Display', serif;
-  --font-mono: 'JetBrains Mono', monospace;
-}
-
-html.light-mode {
-  --bg-color: #fafaf9;
-  --text-primary: #18181b;
-  --text-secondary: #71717a;
-  --text-muted: #d4d4d8;
-  --border-color: #e4e4e7;
-  --accent-color: #0049db; /* Electric Blue */
-}
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 * {
   margin: 0;
@@ -40,343 +13,134 @@ html.light-mode {
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  font-family: var(--font-mono);
+  background: #ffffff;
+  color: #000000;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 14px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center;
+}
+
 a {
-  color: var(--accent-color);
-  text-decoration: underline;
-  transition: opacity 0.2s ease, color 0.2s ease;
+  color: #000000;
+  text-decoration: none;
 }
 
 a:hover {
-  opacity: 0.8;
+  text-decoration: underline;
 }
 
 .container {
   max-width: 720px;
   margin: 0 auto;
-  padding: 80px 24px;
+  padding: 60px 24px;
 }
 
-/* Header & Nav */
+/* Header / Nav */
 header {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 120px;
-}
-
-.logo-link {
-  font-family: var(--font-heading);
-  font-size: 26px;
-  color: var(--text-primary);
-  text-decoration: none;
-  font-style: italic;
+  justify-content: center;
+  margin-bottom: 60px;
 }
 
 .nav-links {
   display: flex;
   gap: 24px;
-  align-items: center;
 }
 
 .nav-links a {
-  color: var(--text-secondary);
+  font-size: 13px;
+  color: #999;
+}
+
+.nav-links a:hover {
+  color: #000;
   text-decoration: none;
-  transition: color 0.2s ease;
-  font-size: 13px;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-  color: var(--text-primary);
-  text-decoration: underline;
-}
-
-.theme-btn {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  padding: 0;
-  transition: color 0.2s ease;
-}
-
-.theme-btn:hover {
-  color: var(--text-primary);
-}
-
-/* Hero Section */
-.hero {
-  margin-bottom: 80px;
-}
-
-.hero h1 {
-  font-family: var(--font-heading);
-  font-size: 48px;
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+/* Hero Image */
+.hero-img {
   margin-bottom: 32px;
 }
 
-.hero p {
-  font-size: 15px;
-  color: var(--text-secondary);
-  max-width: 600px;
+.hero-img img {
+  display: inline-block;
+  width: 85%;
+  height: auto;
+}
+
+/* Hero Name + Links */
+.hero-name {
   margin-bottom: 24px;
+  font-size: 14px;
 }
 
-/* .hero links now styled globally */
-
-/* Social Links List */
-.social-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 80px;
+.hero-name a {
+  margin: 0 4px;
 }
 
-.social-links a {
-  color: var(--accent-color);
-  text-decoration: none;
-  font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+/* About */
+.about {
+  margin-bottom: 60px;
 }
 
-.social-links a::after {
-  content: "↗";
-  font-size: 11px;
-  color: var(--text-secondary);
+.about-text {
+  color: #999;
+  font-size: 14px;
 }
 
-.social-links a:hover {
-  text-decoration: underline;
-  opacity: 0.8;
-}
-
-/* Lists and Sections */
+/* Sections */
 section {
-  margin-bottom: 80px;
+  margin-bottom: 60px;
 }
 
 .section-label {
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: #999;
   letter-spacing: 0.1em;
-  margin-bottom: 32px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 8px;
-}
-
-/* Project Lists (Brutalist Rows) */
-.project-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.project-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--border-color);
-  transition: padding-left 0.2s ease;
-}
-
-.project-row:first-child {
-  border-top: 1px solid var(--border-color);
-}
-
-.project-info {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  max-width: 480px;
-}
-
-.project-title {
-  font-family: var(--font-heading);
-  font-size: 22px;
-  color: var(--text-primary);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.project-title:hover {
-  color: var(--accent-color);
-}
-
-.project-desc {
-  color: var(--text-secondary);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.project-meta {
-  font-size: 11px;
-  color: var(--text-muted);
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.more-link {
+  margin-bottom: 24px;
   display: inline-block;
-  margin-top: 24px;
-  color: var(--text-secondary);
-  text-decoration: none;
 }
 
-.more-link:hover {
-  color: var(--text-primary);
-  text-decoration: underline;
-}
-
-/* Projects Page Details */
-.project-detail-list {
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-}
-
-.project-detail-entry {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding-bottom: 40px;
-  border-bottom: 1px dashed var(--border-color);
-}
-
-.project-detail-entry:last-child {
-  border-bottom: none;
-}
-
-.project-detail-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.project-detail-title {
-  font-family: var(--font-heading);
-  font-size: 28px;
-  font-weight: 400;
-}
-
-.project-detail-title a {
-  color: var(--text-primary);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.project-detail-title a:hover {
-  color: var(--accent-color);
-}
-
-.project-stack {
-  font-size: 11px;
-  color: var(--text-muted);
-  text-transform: lowercase;
-}
-
-.project-detail-desc {
-  color: var(--text-secondary);
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.project-features {
+/* Project List */
+.project-list {
   list-style: none;
-  padding-left: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 8px 0;
+  padding: 0;
+  margin: 0;
+  text-align: center;
 }
 
-.project-features li {
-  font-size: 13px;
-  color: var(--text-secondary);
-  position: relative;
-  padding-left: 20px;
+.project-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 14px;
 }
 
-.project-features li::before {
-  content: "→";
-  position: absolute;
-  left: 0;
-  color: var(--accent-color);
+.project-list li:first-child {
+  border-top: 1px solid #e5e5e5;
 }
 
-.project-detail-links {
-  display: flex;
-  gap: 16px;
-  margin-top: 8px;
-}
-
-.project-detail-links a {
-  color: var(--accent-color);
+.project-list a:hover {
   text-decoration: underline;
-  font-size: 13px;
-}
-
-.project-detail-links a:hover {
-  opacity: 0.8;
 }
 
 /* Footer */
 footer {
-  margin-top: 120px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border-color);
+  margin-top: 80px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e5e5;
   display: flex;
-  justify-content: space-between;
-  color: var(--text-muted);
+  justify-content: center;
+  gap: 16px;
+  color: #999;
   font-size: 12px;
-}
-
-footer a {
-  color: var(--text-muted);
-  text-decoration: none;
-}
-
-footer a:hover {
-  color: var(--text-primary);
 }
 
 /* Responsive */
 @media (max-width: 600px) {
   .container {
     padding: 40px 20px;
-  }
-  
-  header {
-    margin-bottom: 60px;
-  }
-  
-  .hero h1 {
-    font-size: 36px;
-  }
-  
-  .project-row {
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  
-  .project-meta {
-    text-align: left;
   }
 }

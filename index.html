@@ -4,91 +4,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="schallten | Backend Developer specializing in server-side architecture, CLI tools, compilers, and isolated cloud environments.">
+  <meta name="description" content="schallten | Backend Developer">
   <title>schallten | backend developer</title>
   
   <script src="security.js"></script>
-
   <script src="https://schallten.github.io/security.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
   <div class="container">
-    <!-- Header -->
-    <header>
-      <a href="index.html" class="logo-link" id="logo-link">schallten</a>
-      <div class="nav-links" id="nav-navigation">
-        <a href="index.html" class="active">home</a>
-        <a href="projects.html">projects</a>
-        <a href="blog/index.html">blog</a>
+    <!-- Nav -->
+    <header style="text-align:center;">
+      <div class="nav-links">
         <a href="fun.html">fun.mode</a>
-        <button class="theme-btn" id="theme-toggle" aria-label="Toggle Theme">[ dark ]</button>
+        <a href="blog/why-tempdev.html">blog</a>
       </div>
     </header>
 
     <main>
-      <!-- Hero -->
-      <section class="hero" aria-labelledby="hero-heading">
-        <h1 id="hero-heading">I build full-stack applications with a strong focus on backend architecture.</h1>
-        <p>
-          I am a full-stack developer who prefers the server-side. I build interactive web applications and developer tools, ensuring that the backend logic is robust, clean, and highly performant.
-        </p>
-        <p>
-          I focus on building zero-dependency APIs, lightweight virtualization platforms, and custom developer tools. Open to interesting full-stack and backend engineering opportunities.
-        </p>
+      <!-- Profile Image -->
+      <section class="hero-img" style="text-align:center;">
+        <img src="https://i.pinimg.com/1200x/a8/24/74/a82474dcbda77302ea10d8cb7302a377.jpg" alt="profile" />
       </section>
 
-      <!-- Contact Nodes -->
-      <section class="social-links" aria-label="Professional Nodes">
-        <a href="https://github.com/schallten" target="_blank" id="link-github">github</a>
-        <a href="https://www.linkedin.com/in/abhinav-592907335/" target="_blank" id="link-linkedin">linkedin</a>
-        <a href="resume.pdf" id="link-resume">resume</a>
+      <!-- Name + Links -->
+      <section class="hero-name" style="text-align:center;">
+        <span>schallten</span>
+        <span style="color:#999;"> &lt; </span>
+        <a href="https://github.com/schallten" target="_blank">github</a>
+        <span style="color:#999;"> | </span>
+        <a href="https://www.linkedin.com/in/abhinav-592907335/" target="_blank">linkedin</a>
+        <span style="color:#999;"> | </span>
+        <a href="resume.pdf">resume</a>
+        <span style="color:#999;"> &gt; </span>
       </section>
 
-      <!-- Featured Projects -->
-      <section aria-labelledby="featured-heading">
-        <h2 class="section-label" id="featured-heading">featured projects</h2>
+      <!-- About -->
+      <section class="about" style="text-align:center;">
+        <span class="about-text">Full-stack developer who prefers the server-side. Open to interesting full-stack and backend engineering opportunities.</span>
+      </section>
+
+      <!-- Projects -->
+      <section aria-labelledby="projects-heading" style="text-align:center;">
+        <h2 class="section-label" id="projects-heading">projects</h2>
         
-        <div class="project-list">
-          <!-- Container Provider -->
-          <div class="project-row">
-            <div class="project-info">
-              <a href="https://schallten.github.io/container-provider/" class="project-title" target="_blank" id="project-container-provider">Container Provider</a>
-              <span class="project-desc">Lightweight temporary cloud development environments on demand. Spawns isolated shell sandboxes in seconds.</span>
-            </div>
-            <div class="project-meta">Go / Docker / xterm.js</div>
-          </div>
-
-          <!-- Rta -->
-          <div class="project-row">
-            <div class="project-info">
-              <a href="https://rta-three.vercel.app/" class="project-title" target="_blank" id="project-rta">Rta</a>
-              <span class="project-desc">Low-memory AI-assisted terminal text editor built to run with multi-provider API aggregation.</span>
-            </div>
-            <div class="project-meta">JS / Python / Electron</div>
-          </div>
-
-          <!-- PMG -->
-          <div class="project-row">
-            <div class="project-info">
-              <a href="https://github.com/schallten/pmg" class="project-title" target="_blank" id="project-pmg">PMG (Poor Man's Git)</a>
-              <span class="project-desc">Custom Version Control System CLI built in Go with a dedicated web dashboard for indexing commits.</span>
-            </div>
-            <div class="project-meta">Go / React / FastAPI</div>
-          </div>
-
-          <!-- Microcontroller OS -->
-          <div class="project-row">
-            <div class="project-info">
-              <a href="https://github.com/schallten/system_operating" class="project-title" target="_blank" id="project-micro-os">Microcontroller OS</a>
-              <span class="project-desc">Experimental firmware shell environment for ESP8266 featuring LittleFS integration.</span>
-            </div>
-            <div class="project-meta">C++ / ESP8266 / LittleFS</div>
-          </div>
-        </div>
-
-        <a href="projects.html" class="more-link" id="link-all-projects">View all 7 project nodes &rarr;</a>
+        <ul class="project-list" style="list-style:none;">
+          <li><a href="https://schallten.github.io/container-provider/" target="_blank">Container Provider</a></li>
+          <li><a href="https://github.com/schallten/elin" target="_blank">Elin Language</a></li>
+          <li><a href="https://github.com/schallten/system_operating" target="_blank">Microcontroller OS</a></li>
+          <li><a href="https://github.com/schallten/pmg" target="_blank">PMG</a></li>
+          <li><a href="dbms.html" target="_blank">ER Maker</a></li>
+          <li><a href="https://rta-three.vercel.app/" target="_blank">Rta Editor</a></li>
+          <li><a href="https://github.com/schallten/VN-Core" target="_blank">VN-Core</a></li>
+        </ul>
       </section>
     </main>
 
@@ -98,25 +67,6 @@
       <span>full-stack / backend developer</span>
     </footer>
   </div>
-
-  <script>
-    // Theme toggle
-    const themeBtn = document.getElementById('theme-toggle');
-    const root = document.documentElement;
-
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      root.classList.add('light-mode');
-      themeBtn.innerText = '[ light ]';
-    }
-
-    themeBtn.addEventListener('click', () => {
-      root.classList.toggle('light-mode');
-      const isLight = root.classList.contains('light-mode');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      themeBtn.innerText = isLight ? '[ light ]' : '[ dark ]';
-    });
-  </script>
 </body>
 
 </html>
