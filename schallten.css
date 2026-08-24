@@ -1,0 +1,32 @@
+/* schallten - terminal minimal */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+* { box-sizing: border-box; }
+body { margin: 0; background: #0c0c0e; color: #d6d6dd; line-height: 1.75;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 14px; -webkit-font-smoothing: antialiased; }
+header { display: flex; justify-content: space-between; align-items: baseline;
+  max-width: 720px; margin: 0 auto; padding: 2.5rem 1.25rem 0; }
+header h1 { margin: 0; font-size: 1rem; letter-spacing: 0.05em; color: #ffffff; font-weight: 700; }
+nav a { color: #7d7d88; font-size: 13px; text-decoration: none; }
+nav a:hover { color: #ffffff; text-decoration: underline; }
+article, main { max-width: 720px; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
+article h1 { font-size: 1.15rem; color: #ffffff; margin-bottom: 0.25rem; }
+article h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+  color: #7d7d88; margin: 2.5rem 0 1rem; }
+.meta { color: #5c5c66; font-size: 12px; margin: 0 0 2rem; }
+.tags { color: #83d88a; }
+.content p { color: #a8a8b3; margin: 1rem 0; }
+a { color: #d6d6dd; text-decoration: none; border-bottom: 1px solid #3a3a44; }
+a:hover { border-bottom-color: #83d88a; color: #ffffff; }
+ul { list-style: none; padding: 0; margin: 0; }
+li { padding: 10px 0; border-bottom: 1px solid #1c1c22; font-size: 14px; }
+li:first-child { border-top: 1px solid #1c1c22; }
+code { background: #16161b; color: #83d88a; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.9em; }
+pre { background: #101014; border: 1px solid #1c1c22; padding: 1rem; overflow-x: auto; border-radius: 6px; }
+pre code { background: none; padding: 0; color: #d6d6dd; }
+blockquote { margin-left: 0; padding-left: 1rem; border-left: 3px solid #83d88a; color: #a8a8b3; }
+hr { border: none; border-top: 1px solid #1c1c22; margin: 2.5rem 0; }
+main h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: #7d7d88; }
+footer { max-width: 720px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem;
+  border-top: 1px solid #1c1c22; display: flex; justify-content: space-between;
+  color: #5c5c66; font-size: 12px; }
