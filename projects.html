@@ -51,43 +51,7 @@
             </div>
           </article>
 
-          <!-- 2. Elin Language -->
-          <article class="project-detail-entry" id="detail-elin">
-            <div class="project-detail-header">
-              <h3 class="project-detail-title"><a href="https://github.com/schallten/elin" target="_blank">Elin Programming Language</a></h3>
-              <span class="project-stack">python / c++ / virtual machine</span>
-            </div>
-            <p class="project-detail-desc">
-              A custom stack-based language implementation. Combines a Python-based parser/compiler translating code to bytes, with a lightweight, high-performance C++ Virtual Machine for command execution.
-            </p>
-            <ul class="project-features">
-              <li>Custom ISA bytecode compiler including basic loops, math, and variable routines.</li>
-              <li>Stack VM engine in C++ with direct register emulation and fast execution.</li>
-            </ul>
-            <div class="project-detail-links">
-              <a href="https://github.com/schallten/elin" target="_blank">github repo</a>
-            </div>
-          </article>
-
-          <!-- 3. Microcontroller OS -->
-          <article class="project-detail-entry" id="detail-micro-os">
-            <div class="project-detail-header">
-              <h3 class="project-detail-title"><a href="https://github.com/schallten/system_operating" target="_blank">Microcontroller OS</a></h3>
-              <span class="project-stack">c++ / esp8266 / littlefs</span>
-            </div>
-            <p class="project-detail-desc">
-              Experimental firmware shell utility for NodeMCU boards. Builds a custom interactive shell environment directly over physical serial connections.
-            </p>
-            <ul class="project-features">
-              <li>Custom implementation of the LittleFS filesystem for flash memory indexing.</li>
-              <li>Serial shell commands allowing file transfers, directories manipulation, and direct hardware pin state controls.</li>
-            </ul>
-            <div class="project-detail-links">
-              <a href="https://github.com/schallten/system_operating" target="_blank">github repo</a>
-            </div>
-          </article>
-
-          <!-- 4. PMG -->
+          <!-- 2. PMG -->
           <article class="project-detail-entry" id="detail-pmg">
             <div class="project-detail-header">
               <h3 class="project-detail-title"><a href="https://github.com/schallten/pmg" target="_blank">PMG (Poor Man's Git)</a></h3>
@@ -124,39 +88,57 @@
             </div>
           </article>
 
-          <!-- 6. Rta -->
-          <article class="project-detail-entry" id="detail-rta">
+          <!-- 3. TinyMail -->
+          <article class="project-detail-entry" id="detail-tinymail">
             <div class="project-detail-header">
-              <h3 class="project-detail-title"><a href="https://rta-three.vercel.app/" target="_blank">Rta Code Editor</a></h3>
-              <span class="project-stack">javascript / python / electron / fastapi</span>
+              <h3 class="project-detail-title"><a href="https://github.com/schallten/tinyMail" target="_blank">TinyMail</a></h3>
+              <span class="project-stack">go / smtp / pop3</span>
             </div>
             <p class="project-detail-desc">
-              AI-assisted code editor client. Uses an optimized local Python middleware server to proxy multiple provider APIs and compile contextual data, leaving the Electron client wrapper extremely lightweight and fast.
+              A mail server written in Go implementing SMTP for receiving mail and POP3 for retrieving it. Messages are stored on the local filesystem — no database, no external dependencies.
             </p>
             <ul class="project-features">
-              <li>Low-overhead client window consuming less than 45MB of memory on startup.</li>
-              <li>Multi-provider aggregation allowing seamless switches between commercial and local model APIs.</li>
+              <li>Protocol engines implemented from the RFC specifications, interoperable with standard mail clients like Thunderbird.</li>
+              <li>Atomic mailbox writes (tmp → fsync → rename) with per-user .eml storage, preventing partial commits on crash.</li>
             </ul>
             <div class="project-detail-links">
-              <a href="https://rta-three.vercel.app/" target="_blank">explore mockup</a>
+              <a href="https://github.com/schallten/tinyMail" target="_blank">github repo</a>
             </div>
           </article>
 
-          <!-- 7. VN-Core -->
-          <article class="project-detail-entry" id="detail-vn-core">
+          <!-- 4. Battleship -->
+          <article class="project-detail-entry" id="detail-battleship">
             <div class="project-detail-header">
-              <h3 class="project-detail-title"><a href="https://github.com/schallten/VN-Core" target="_blank">VN-Core Visual Novel Engine</a></h3>
-              <span class="project-stack">python / pygame / story dsl</span>
+              <h3 class="project-detail-title"><a href="https://github.com/schallten/battleship" target="_blank">Battleship</a></h3>
+              <span class="project-stack">zig / udp networking</span>
             </div>
             <p class="project-detail-desc">
-              Storyboard rendering engine for interactive storytelling. Uses a custom script parser translating text script instructions into coordinates, audio triggers, and graphic overlays.
+              1v1 Battleship over raw UDP, written in Zig. A server-authoritative game where each side places 5 ships on a 10x10 grid and takes turns attacking until turns are spent; the higher score wins.
             </p>
             <ul class="project-features">
-              <li>Script compiler converting visual novel coordinates and dialogues into Pygame scene trees.</li>
-              <li>Automated scene index states, sound caches, saving points, and dialog logs.</li>
+              <li>Turn-based protocol over UDP with server-side validation — ship positions are never revealed to the opposing client.</li>
+              <li>Stateful session lifecycle (placement → combat) that automatically resets so new matches start immediately after game over.</li>
             </ul>
             <div class="project-detail-links">
-              <a href="https://github.com/schallten/VN-Core" target="_blank">github repo</a>
+              <a href="https://github.com/schallten/battleship" target="_blank">github repo</a>
+            </div>
+          </article>
+
+          <!-- 5. Postmark -->
+          <article class="project-detail-entry" id="detail-postmark">
+            <div class="project-detail-header">
+              <h3 class="project-detail-title"><a href="https://github.com/schallten/postmark" target="_blank">Postmark</a></h3>
+              <span class="project-stack">nim / markdown</span>
+            </div>
+            <p class="project-detail-desc">
+              A tiny static site generator for markdown blogs, written in Nim. Point it at a folder of markdown files and it generates HTML pages plus an index.
+            </p>
+            <ul class="project-features">
+              <li>Markdown-to-HTML pipeline producing posts and a generated index page.</li>
+              <li>Single-binary build via nimble with no runtime dependencies.</li>
+            </ul>
+            <div class="project-detail-links">
+              <a href="https://github.com/schallten/postmark" target="_blank">github repo</a>
             </div>
           </article>
         </div>
